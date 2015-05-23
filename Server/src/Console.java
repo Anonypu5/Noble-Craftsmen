@@ -37,25 +37,17 @@ public class Console {
 
         textPane = new JTextPane();
         textPane.setEditable(false);
-<<<<<<< HEAD
-        textPane.setBackground(Color.black);
-=======
+        textPane.setBackground(Color.BLACK);
 		document = textPane.getStyledDocument();
 		style = textPane.addStyle("Style all the things", null);
->>>>>>> 7110ec5e406604d74a9da37e0aa6eec07be2ef7b
         frame.add(new JScrollPane(textPane), BorderLayout.CENTER);
 
         textField = new JTextField();
         textField.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-                if (!e.getActionCommand().equals("")) {
-                    println("> " + e.getActionCommand());
-=======
                 if(!e.getActionCommand().equals("")){
-                    println("> "+e.getActionCommand(), Color.BLUE);
->>>>>>> 7110ec5e406604d74a9da37e0aa6eec07be2ef7b
+                    println("> "+e.getActionCommand(), new Color(255,0,255));
                     textField.setText("");
 
                     if (nextRequested) {
@@ -67,11 +59,14 @@ public class Console {
             }
         });
         textField.setBackground(new Color(40,40,40));
-        textField.setCaretColor(Color.green);
-        textField.setForeground(Color.blue);
+        textField.setCaretColor(Color.GREEN);
+        textField.setForeground(new Color(255,0,255));
         frame.add(textField, BorderLayout.SOUTH);
 
         frame.setVisible(true);
+
+		frame.requestFocus();
+		textField.requestFocusInWindow();
     }
 
     public static void println(String text){
