@@ -37,25 +37,18 @@ public class Console {
 
         textPane = new JTextPane();
         textPane.setEditable(false);
-<<<<<<< HEAD
         textPane.setBackground(Color.black);
-=======
 		document = textPane.getStyledDocument();
 		style = textPane.addStyle("Style all the things", null);
->>>>>>> 7110ec5e406604d74a9da37e0aa6eec07be2ef7b
         frame.add(new JScrollPane(textPane), BorderLayout.CENTER);
 
         textField = new JTextField();
         textField.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-                if (!e.getActionCommand().equals("")) {
-                    println("> " + e.getActionCommand());
-=======
+
                 if(!e.getActionCommand().equals("")){
                     println("> "+e.getActionCommand(), Color.BLUE);
->>>>>>> 7110ec5e406604d74a9da37e0aa6eec07be2ef7b
                     textField.setText("");
 
                     if (nextRequested) {
