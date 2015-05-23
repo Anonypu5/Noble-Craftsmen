@@ -34,7 +34,7 @@ public class Save {
             Console.println("Could not find any directory at \""+folder+"\", would you like to create or set other directory path: create/other?");
             String answer = Console.requestNext();
             while(!answer.equals("create")&&!answer.equals("other")){
-                Console.println("Please write other or create");
+                Console.printErr("Please write other or create");
                 answer = Console.requestNext();
             }
         }
