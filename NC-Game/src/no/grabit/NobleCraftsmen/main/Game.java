@@ -1,5 +1,7 @@
 package no.grabit.NobleCraftsmen.main;
 
+import no.grabit.NobleCraftsmen.scenegraph.GameObject;
+import no.grabit.NobleCraftsmen.util.Time;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.Display;
@@ -12,27 +14,48 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class Game implements Runnable {
 
-	public Game() {}
+	private GameObject root;
+
+	public Game() {
+		root = new GameObject();
+	}
 
 	public void run() {
 		init();
 
+		long lastTime = System.nanoTime();
+
 		while(!Display.isCloseRequested()) {
-			glClear(GL_COLOR_BUFFER_BIT);
+			long now = System.nanoTime();
+			Time.setDeltaTime(lastTime, now);
+			lastTime = now;
 
-			glColor3f(1f, 0f, 0f);
-
-			glBegin(GL_TRIANGLES);
-			glVertex2f(-0.5f, -0.5f);
-			glVertex2f(0.5f, -0.5f);
-			glVertex2f(0, 0.5f);
-			glEnd();
+			update();
+			render();
 
 			Display.update();
 			handleDisplayChanges();
 		}
 
 		Display.destroy();
+	}
+
+	private void update() {
+		root.update();
+	}
+
+	private void render() {
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		glColor3f(1f, 0f, 0f);
+
+		glBegin(GL_TRIANGLES);
+		glVertex2f(-0.5f, -0.5f);
+		glVertex2f(0.5f, -0.5f);
+		glVertex2f(0, 0.5f);
+		glEnd();
+
+		root.render();
 	}
 
 	public static void main(String[] args) {
