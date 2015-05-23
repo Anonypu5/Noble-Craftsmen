@@ -37,11 +37,7 @@ public class Console {
 
         textPane = new JTextPane();
         textPane.setEditable(false);
-<<<<<<< HEAD
         textPane.setBackground(Color.BLACK);
-=======
-        textPane.setBackground(Color.black);
->>>>>>> origin/master
 		document = textPane.getStyledDocument();
 		style = textPane.addStyle("Style all the things", null);
         frame.add(new JScrollPane(textPane), BorderLayout.CENTER);
@@ -50,14 +46,8 @@ public class Console {
         textField.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
                 if(!e.getActionCommand().equals("")){
                     println("> "+e.getActionCommand(), new Color(255,0,255));
-=======
-
-                if(!e.getActionCommand().equals("")){
-                    println("> "+e.getActionCommand(), Color.BLUE);
->>>>>>> origin/master
                     textField.setText("");
 
                     if (nextRequested) {
