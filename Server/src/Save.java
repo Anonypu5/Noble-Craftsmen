@@ -37,6 +37,10 @@ public class Save {
                 Console.println("Please write other or create");
                 answer = Console.requestNext();
             }
+
+            if(answer.equals("create")){
+
+            }
         }
     }
 

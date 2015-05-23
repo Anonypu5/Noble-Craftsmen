@@ -31,24 +31,28 @@ public class Console {
 
         textPane = new JTextPane();
         textPane.setEditable(false);
+        textPane.setBackground(Color.black);
         frame.add(new JScrollPane(textPane), BorderLayout.CENTER);
 
         textField = new JTextField();
         textField.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                if(!e.getActionCommand().equals("")){
-                    println("> "+e.getActionCommand());
+                if (!e.getActionCommand().equals("")) {
+                    println("> " + e.getActionCommand());
                     textField.setText("");
 
-                    if(nextRequested){
+                    if (nextRequested) {
                         request = e.getActionCommand();
-                    }else{
+                    } else {
                         doCommand(e.getActionCommand());
                     }
                 }
             }
         });
+        textField.setBackground(new Color(40,40,40));
+        textField.setCaretColor(Color.green);
+        textField.setForeground(Color.blue);
         frame.add(textField, BorderLayout.SOUTH);
 
         frame.setVisible(true);
