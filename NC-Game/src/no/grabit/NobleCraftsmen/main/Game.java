@@ -12,8 +12,6 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class Game implements Runnable {
 
-	float x = 400, y = 300;
-
 	public Game() {}
 
 	public void run() {
@@ -40,8 +38,7 @@ public class Game implements Runnable {
 	public static void main(String[] args) {
 
 		Game game = new Game();
-		//new Thread(game, "mainloop").start();
-		game.run();
+		new Thread(game, "main loop").start();
 	}
 
 	private void handleDisplayChanges() {
