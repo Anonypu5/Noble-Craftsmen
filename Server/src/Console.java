@@ -28,10 +28,7 @@ public class Console {
         frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
-                println("Saving...");
-                println("See you soon, captain :)");
-                println("PS: We fucked your mum");
-                System.exit(0);
+                exit();
             }
         });
 
@@ -89,6 +86,8 @@ public class Console {
     public static void doCommand(String command){
         if(command.startsWith("echo ")){
             commands.echo(command);
+        }else if(command.equals("exit")){
+            exit();
         }else{
             printErr("Unknown command \""+command+"\"");
         }
@@ -110,6 +109,14 @@ public class Console {
         nextRequested = false;
         return request;
     }
+
+    public static void exit(){
+        println("Saving...");
+        println("See you soon, captain :)");
+        println("PS: We fucked your mum");
+        System.exit(0);
+    }
+
 }class commands{
 
     public static void echo(String command){
