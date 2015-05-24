@@ -22,6 +22,7 @@ import java.util.List;
 public class Console {
 
 	private static List<Command> commands = new ArrayList<>();
+	private static String name;
 	private static JFrame frame;
 	private static JTextPane textPane;
 	private static StyledDocument document;
@@ -34,6 +35,13 @@ public class Console {
 		commands.add(new Command("echo") {
 			public void run(String args) {
 				Console.println("Echoed \"" + args + "\"");
+			}
+		});
+
+		commands.add(new Command("setname") {
+			public void run(String args) {
+				Console.name = args.trim().split(" ")[0];
+				Console.println("set name to \"" + Console.name + "\"");
 			}
 		});
 

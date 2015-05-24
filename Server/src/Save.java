@@ -33,8 +33,8 @@ public class Save {
         if(!file.exists()){
             Console.println("Could not find any directory at \""+folder+"\", would you like to create a new server or set new directory path: create/new?");
             String answer = Console.requestNext();
-            while(!answer.equals("create")&&!answer.equals("other")){
-                Console.printErr("Please write other or create");
+            while(!answer.equals("create")&&!answer.equals("new")){
+                Console.printErr("Please write new or create");
                 answer = Console.requestNext();
             }
 
