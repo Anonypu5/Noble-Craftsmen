@@ -58,7 +58,13 @@ public class Console {
 
 		commands.add(new Command("getport") {
 			public void run(String args) {
-				Console.println("Port = "+Save.port);
+				Console.println("Port = " + Save.port);
+			}
+		});
+
+		commands.add(new Command("clear") {
+			public void run(String args) {
+				textPane.setText("");
 			}
 		});
 
