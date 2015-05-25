@@ -26,7 +26,7 @@ public class Main {
             public void clientConnected(ServerConnection conn) {
 
             }
-        }, "localhost", 1999, true);
+        }, "92.220.161.232", 1999, true);
         try {
             conn.connect();
         } catch (IOException e) {

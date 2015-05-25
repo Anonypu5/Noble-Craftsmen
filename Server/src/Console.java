@@ -74,7 +74,6 @@ public class Console {
 		commands.add(new Command("start") {
 			public void run(String args) {
 				new Thread(new ServerClass(),"ServerClass").start();
-				Console.println("Started server on port" + Save.port);
 			}
 		});
 
