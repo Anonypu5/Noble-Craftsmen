@@ -1,21 +1,30 @@
-import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JTextPane;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Elias on 5/23/2015.
  */
 public class Console {
 
-    private static JFrame frame;
-    private static JTextPane textPane;
+	private static List<Command> commands = new ArrayList<>();
+	private static String name;
+	private static JFrame frame;
+	private static JTextPane textPane;
 	private static StyledDocument document;
 	private static Style style;
     private static JTextField textField;
@@ -32,45 +41,56 @@ public class Console {
             }
         });
 
-        textPane = new JTextPane();
-        textPane.setEditable(false);
-        textPane.setBackground(Color.BLACK);
-		document = textPane.getStyledDocument();
-		style = textPane.addStyle("Style all the things", null);
-        frame.add(new JScrollPane(textPane), BorderLayout.CENTER);
-
-        textField = new JTextField();
-        textField.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                if(!e.getActionCommand().equals("")){
-                    println("> "+e.getActionCommand(), new Color(255,0,255));
-                    textField.setText("");
-
-                    if (nextRequested) {
-                        request = e.getActionCommand();
-                    } else {
-                        doCommand(e.getActionCommand());
-                    }
-                }
+		commands.add(new Command("echo") {
+            public void run(String args) {
+                Console.println("Echoed \"" + args + "\"");
             }
         });
-        textField.setBackground(new Color(40,40,40));
-        textField.setCaretColor(Color.GREEN);
-        textField.setForeground(new Color(255,0,255));
-        frame.add(textField, BorderLayout.SOUTH);
 
-        frame.setVisible(true);
+		commands.add(new Command("setname") {
+            public void run(String args) {
+                Console.name = args.trim().split(" ")[0];
+                Console.println("set name to \"" + Console.name + "\"");
+            }
+        });
+
+
+		textPane = new JTextPane();
+		textPane.setEditable(false);
+		textPane.setBackground(Color.BLACK);
+		document = textPane.getStyledDocument();
+		style = textPane.addStyle("Style all the things", null);
+		frame.add(new JScrollPane(textPane), BorderLayout.CENTER);
+
+		textField = new JTextField();
+		textField.addActionListener(e -> {
+			if (!e.getActionCommand().equals("")) {
+				println("> " + e.getActionCommand(), new Color(255, 0, 255));
+				textField.setText("");
+
+				if (nextRequested) {
+					request = e.getActionCommand();
+				} else {
+					doCommand(e.getActionCommand());
+				}
+			}
+		});
+		textField.setBackground(new Color(40, 40, 40));
+		textField.setCaretColor(Color.GREEN);
+		textField.setForeground(new Color(255, 0, 255));
+		frame.add(textField, BorderLayout.SOUTH);
+
+		frame.setVisible(true);
 
 		frame.requestFocus();
 		textField.requestFocusInWindow();
-    }
+	}
 
-    public static void println(String text){
+	public static void println(String text) {
 		println(text, Color.GREEN);
-    }
+	}
 
-	public static void println(String text, Color color){
+	public static void println(String text, Color color) {
 		StyleConstants.setForeground(style, color);
 		try {
 			document.insertString(document.getLength(), text + "\n", style);
@@ -83,33 +103,6 @@ public class Console {
 		println(text, Color.RED);
 	}
 
-    public static void doCommand(String command){
-        if(command.startsWith("echo ")){
-            commands.echo(command);
-        }else if(command.equals("exit")){
-            exit();
-        }else{
-            printErr("Unknown command \""+command+"\"");
-        }
-    }
-
-    public static String requestNext() {
-        if(nextRequested){
-            return null;
-        }
-        nextRequested = true;
-        request = "";
-        while(request.equals("")){
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        nextRequested = false;
-        return request;
-    }
-
     public static void exit(){
         println("Saving...");
         println("See you soon, captain :)");
@@ -117,10 +110,50 @@ public class Console {
         System.exit(0);
     }
 
-}class commands{
+	public static void doCommand(String commandString) {
+		String start = commandString.trim().split(" ")[0].toLowerCase();
+		boolean foundCommand = false;
+		for (Command command : commands) {
+			if (command.getName().equals(start)) {
+				command.run(commandString.substring(start.length() + 1));
+				foundCommand = true;
+				break;
+			}
+		}
+		if(!foundCommand)
+			printErr("No such command: \"" + start + "\n");
+	}
 
-    public static void echo(String command){
-        command = command.substring(5);
-        Console.println("Echoed \""+command+"\"");
-    }
+	public static String requestNext() {
+		if (nextRequested) {
+			return null;
+		}
+		nextRequested = true;
+		request = "";
+		while (request.equals("")) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		nextRequested = false;
+		return request;
+	}
+}
+
+abstract class Command {
+
+	private String name;
+
+	public Command(String name) {
+		this.name = name.toLowerCase();
+	}
+
+	public abstract void run(String args);
+
+	public String getName() {
+		return name;
+	}
+
 }

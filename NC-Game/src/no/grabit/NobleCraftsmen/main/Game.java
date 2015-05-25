@@ -1,5 +1,10 @@
 package no.grabit.NobleCraftsmen.main;
 
+import no.grabit.NobleCraftsmen.graphics.Shader;
+import no.grabit.NobleCraftsmen.graphics.Sprite;
+import no.grabit.NobleCraftsmen.scenegraph.GameComponent;
+import no.grabit.NobleCraftsmen.scenegraph.GameObject;
+import no.grabit.NobleCraftsmen.util.Time;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.Display;
@@ -12,36 +17,65 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class Game implements Runnable {
 
-	public Game() {}
+	public static final String TITLE = "Noble Craftsmen";
+
+	private GameObject root;
+	private GameComponent sprite;
 
 	public void run() {
 		init();
 
+		initGame();
+
+		long lastTime = System.nanoTime();
+
+		//root.add(sprite);
+
 		while(!Display.isCloseRequested()) {
-			glClear(GL_COLOR_BUFFER_BIT);
+			long now = System.nanoTime();
+			Time.setDeltaTime(lastTime, now);
+			lastTime = now;
 
-			glColor3f(1f, 0f, 0f);
+			update();
+			render();
 
-			glBegin(GL_TRIANGLES);
-			glVertex2f(-0.5f, -0.5f);
-			glVertex2f(0.5f, -0.5f);
-			glVertex2f(0, 0.5f);
-			glEnd();
-
-			Display.update();
-			handleDisplayChanges();
+			handleDisplayUpdate();
 		}
 
 		Display.destroy();
 	}
 
-	public static void main(String[] args) {
+	private void update() {
+		root.update();
+	}
 
+	private void render() {
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		Shader.basicShader.bind();
+
+		glBegin(GL_QUADS);
+		glTexCoord2f(0, 0);
+		glVertex2f(-0.5f, -0.5f);
+		glTexCoord2f(1, 0);
+		glVertex2f(0.5f, -0.5f);
+		glTexCoord2f(1, 1);
+		glVertex2f(0.5f, 0.5f);
+		glTexCoord2f(0, 1);
+		glVertex2f(-0.5f, 0.5f);
+		glEnd();
+
+		root.render();
+	}
+
+	public static void main(String[] args) {
 		Game game = new Game();
 		new Thread(game, "main loop").start();
 	}
 
-	private void handleDisplayChanges() {
+	private void handleDisplayUpdate() {
+		Display.update();
+
 		if(Display.wasResized()) {
 			glViewport(0, 0, Display.getWidth(), Display.getHeight());
 			glMatrixMode(GL_PROJECTION);
@@ -54,6 +88,11 @@ public class Game implements Runnable {
 	private static void init() {
 		initDisplay();
 		initGL();
+	}
+
+	private void initGame() {
+		root = new GameObject();
+		sprite = new Sprite("textures/Commando.png");
 	}
 
 	private static void initGL() {
@@ -71,7 +110,7 @@ public class Game implements Runnable {
 			Display.setDisplayMode(new DisplayMode(800, 600));
 			Display.create();
 			Display.setResizable(true);
-
+			Display.setTitle(Game.TITLE);
 		} catch(LWJGLException e) {
 			e.printStackTrace();
 			System.exit(-69);

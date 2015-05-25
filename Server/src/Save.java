@@ -66,14 +66,29 @@ public class Save {
         file.obj = new Object[1][2];
         file.obj[0][0] = "Port";
         file.obj[0][1] = port;
+        byte[] bytes;
         try {
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             ObjectOutputStream o = new ObjectOutputStream(b);
             o.writeObject(file);
+            bytes = b.toByteArray();
+            throw new Exception("your mum");
         }catch(Exception e){
-
+            Console.printErr(e.toString());
             for (StackTraceElement x: e.getStackTrace()){
-                Console.printErr();
+                Console.printErr("    "+x.toString());
+            }
+            e.printStackTrace();
+            Console.println("The process above failed, due to the error above \n Do you want to try again y/n?");
+            String awnser = Console.requestNext();
+            while(!awnser.equals("y")&&!awnser.equals("n")){
+                Console.println("Please write y or n");
+                awnser = Console.requestNext();
+            }
+            if(awnser.equals("y")){
+                creatingSettings(port);
+            }else{
+                Console.exit();
             }
         }
 

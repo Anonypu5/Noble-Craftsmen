@@ -34,8 +34,22 @@ public class GameObject implements Serializable {
 	public final void update() {
 		updateObject();
 
-		for(GameObject object : children) {
+		for(GameComponent component : components) {
+			component.update();
+		}
+		for(GameObject child : children) {
+			child.update();
+		}
+	}
 
+	public final void render() {
+		renderObject();
+
+		for(GameComponent component : components) {
+			component.render();
+		}
+		for(GameObject child : children) {
+			child.render();
 		}
 	}
 
