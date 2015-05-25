@@ -48,17 +48,6 @@ public class GameObject implements Serializable {
 			child.update();
 		}
 	}
-<<<<<<< HEAD
-
-	public final void render() {
-		renderObject();
-
-		for(GameComponent component : components) {
-			component.render();
-		}
-		for(GameObject child : children) {
-			child.render();
-=======
 
 	public final void render() {
 		renderObject();
@@ -79,7 +68,6 @@ public class GameObject implements Serializable {
 		}
 		for(GameObject child : children) {
 			child.exit();
->>>>>>> origin/master
 		}
 	}
 

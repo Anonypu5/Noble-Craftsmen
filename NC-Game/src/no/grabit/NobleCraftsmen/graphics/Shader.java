@@ -1,18 +1,13 @@
 package no.grabit.NobleCraftsmen.graphics;
 
 import no.grabit.NobleCraftsmen.util.FileUtils;
-<<<<<<< HEAD
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBVertexShader;
-=======
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.ARBFragmentShader;
-import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.util.vector.Matrix4f;
 
 import java.nio.FloatBuffer;
->>>>>>> origin/master
 
 import static org.lwjgl.opengl.ARBShaderObjects.*;
 import static org.lwjgl.opengl.GL11.GL_FALSE;
@@ -21,12 +16,8 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
  * Created by Ole on 24/05/2015.
  */
 public class Shader {
-
-<<<<<<< HEAD
-=======
 	private static Shader curShader = null;
 
->>>>>>> origin/master
 	public static final Shader basicShader = new Shader("basic");
 
 	private int program;
@@ -65,30 +56,19 @@ public class Shader {
 			return;
 		}
 
-<<<<<<< HEAD
-=======
-
 		GL20.glBindAttribLocation(program, 0, "attr_Position");
 		GL20.glBindAttribLocation(program, 1, "attr_TexCoord");
 
-		int uniform1 = glGetUniformLocationARB(program, "modelView");
-
->>>>>>> origin/master
 		this.program = tempProgram;
 	}
 
 	public void bind() {
 		glUseProgramObjectARB(program);
-<<<<<<< HEAD
-=======
 		curShader = this;
->>>>>>> origin/master
 	}
 
 	public static void unbind() {
 		glUseProgramObjectARB(0);
-<<<<<<< HEAD
-=======
 		curShader = null;
 	}
 
@@ -99,7 +79,6 @@ public class Shader {
 		mat4.store(floatBuffer);
 		floatBuffer.flip();
 		glUniformMatrix4ARB(glGetUniformLocationARB(curShader.program, name), false, floatBuffer);
->>>>>>> origin/master
 	}
 
 	private int createShader(String shaderName, int shaderType) throws Exception {

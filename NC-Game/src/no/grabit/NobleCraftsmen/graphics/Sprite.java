@@ -1,35 +1,7 @@
 package no.grabit.NobleCraftsmen.graphics;
 
 import no.grabit.NobleCraftsmen.scenegraph.GameComponent;
-<<<<<<< HEAD
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.util.ResourceLoader;
 
-import java.io.IOException;
-
-import static org.lwjgl.opengl.GL11.*;
-
-/**
- * Created by Ole on 24/05/2015.
- */
-public class Sprite extends GameComponent {
-
-	private Texture texture;
-
-	public Sprite(String spriteName) {
-		try {
-			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream(spriteName));
-		} catch (IOException e) {
-			e.printStackTrace();
-			texture = null;
-			System.out.println("Couldn't load texture \"" + spriteName + "\"");
-		}
-	}
-
-	public void update() {
-
-=======
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL30;
 
@@ -40,6 +12,9 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 
+/**
+ * Created by Ole on 24/05/2015.
+ */
 public class Sprite extends GameComponent {
 
 	Texture texture;
@@ -94,41 +69,10 @@ public class Sprite extends GameComponent {
 
 	public void update() {
 		// don't need this
->>>>>>> origin/master
 	}
 
 	public void render() {
 		texture.bind();
-<<<<<<< HEAD
-		glBegin(GL_QUADS);
-		glTexCoord2f(0, 0);
-		glVertex2f(-0.5f, -0.5f);
-		glTexCoord2f(1, 0);
-		glVertex2f(0.5f, -0.5f);
-		glTexCoord2f(1, 1);
-		glVertex2f(0.5f, 0.5f);
-		glTexCoord2f(0, 1);
-		glVertex2f(-0.5f, 0.5f);
-		glEnd();
-	}
-}
-=======
-
-//		Vector2f translation = getParent().getTransform().getPosition();
-//		glTranslatef(translation.x, translation.y, 0);
-//
-//		float rotation = getParent().getTransform().getRotation();
-//		glRotatef(rotation, 0f, 0f, 1f);
-//
-//		Vector2f scale = getParent().getTransform().getPosition();
-//		glScalef(scale.x, scale.y, 1);
-
-//		glBegin(GL_QUADS);
-//		glVertex2f(0.0f, 0.0f);
-//		glVertex2f(1.0f, 0.0f);
-//		glVertex2f(1.0f, 1.0f);
-//		glVertex2f(0.0f, 1.0f);
-//		glEnd();
 
 		Shader.setUnfiformMat4f(getModelView(), "modelView");
 
@@ -152,4 +96,3 @@ public class Sprite extends GameComponent {
 	}
 
 }
->>>>>>> origin/master
