@@ -27,6 +27,7 @@ public class Console {
 	private static JTextPane textPane;
 	private static StyledDocument document;
 	private static Style style;
+<<<<<<< HEAD
     private static JTextField textField;
     private static boolean nextRequested;
     private static String request = "";
@@ -54,6 +55,37 @@ public class Console {
             }
         });
 
+=======
+	private static JTextField textField;
+	private static boolean nextRequested;
+	private static String request = "";
+
+	public Console() {
+		commands.add(new Command("echo") {
+			public void run(String args) {
+				Console.println("Echoed \"" + args + "\"");
+			}
+		});
+
+		commands.add(new Command("setname") {
+			public void run(String args) {
+				Console.name = args.trim().split(" ")[0];
+				Console.println("set name to \"" + Console.name + "\"");
+			}
+		});
+
+		frame = new JFrame("NC-Server");
+		frame.setSize(800, 600);
+		frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent windowEvent) {
+				println("Saving...");
+				println("See you soon, captain :)");
+				println("PS: We fucked your mum");
+				System.exit(0);
+			}
+		});
+>>>>>>> origin/master
 
 		textPane = new JTextPane();
 		textPane.setEditable(false);
@@ -103,6 +135,7 @@ public class Console {
 		println(text, Color.RED);
 	}
 
+<<<<<<< HEAD
     public static void exit(){
         println("Saving...");
         println("See you soon, captain :)");
@@ -110,6 +143,8 @@ public class Console {
         System.exit(0);
     }
 
+=======
+>>>>>>> origin/master
 	public static void doCommand(String commandString) {
 		String start = commandString.trim().split(" ")[0].toLowerCase();
 		boolean foundCommand = false;

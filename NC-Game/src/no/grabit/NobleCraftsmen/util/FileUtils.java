@@ -1,6 +1,13 @@
 package no.grabit.NobleCraftsmen.util;
 
+<<<<<<< HEAD
 import java.io.File;
+=======
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+>>>>>>> origin/master
 import java.net.URL;
 import java.util.Scanner;
 
@@ -31,4 +38,16 @@ public class FileUtils {
 		return result;
 	}
 
+<<<<<<< HEAD
+=======
+	public static BufferedImage loadImageFile(String fileName) {
+		try {
+			return ImageIO.read(FileUtils.class.getResourceAsStream(fileName));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+>>>>>>> origin/master
 }
