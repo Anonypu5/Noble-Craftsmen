@@ -33,6 +33,8 @@ public class Console {
 	private static String request = "";
 
 	public Console() {
+		Theme.init();
+
 		commands.add(new Command("echo") {
 			public void run(String args) {
 				if(ServerClass.running){
@@ -82,7 +84,13 @@ public class Console {
 
 		commands.add(new Command("createtheme") {
 			public void run(String args) {
-				String[] args =
+				String[] arguments = args.trim().split(" ");
+				if(arguments.length < 5) {
+					Console.printErr("Too few arguments - follow the following template createtheme name backgroundCol commandCol infoCol errorCol");
+				} else if(arguments.length > 5) {
+					Console.printErr("Too many arguments - follow the following template createtheme name backgroundCol commandCol infoCol errorCol");
+				}
+				String name = arguments[0];
 			}
 		});
 

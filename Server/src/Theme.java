@@ -1,36 +1,43 @@
 import java.awt.*;
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Created by Ole on 25/05/2015.
  */
-public class Theme {
+public class Theme implements Serializable {
 
-	public static HashMap<String, Color> colors = new HashMap<>();
-	public static HashMap<String, Theme> themes = new HashMap<>();
+	private static HashMap<String, Color> defaultColors = new HashMap<>();
+	private static HashMap<String, Color> colors = new HashMap<>();
+	private static HashMap<String, Theme> themes = new HashMap<>();
+	private static boolean initialized;
 
 	private String name;
 	private Color background, error, command, info;
 
 	public static void init() {
-		colors.put("gray", Color.GRAY);
-		colors.put("light_gray", Color.LIGHT_GRAY);
-		colors.put("dark_gray", Color.DARK_GRAY);
-		colors.put("cyan", Color.CYAN);
-		colors.put("red", Color.RED);
-		colors.put("green", Color.GREEN);
-		colors.put("blue", Color.BLUE);
-		colors.put("black", Color.BLACK);
-		colors.put("white", Color.WHITE);
-		colors.put("pink", Color.PINK);
-		colors.put("ORANGE", Color.ORANGE);
-		colors.put("pink", Color.PINK);
+		if (initialized)
+			return;
+		initialized = true;
+
+		defaultColors.put("gray", Color.GRAY);
+		defaultColors.put("light_gray", Color.LIGHT_GRAY);
+		defaultColors.put("dark_gray", Color.DARK_GRAY);
+		defaultColors.put("cyan", Color.CYAN);
+		defaultColors.put("red", Color.RED);
+		defaultColors.put("green", Color.GREEN);
+		defaultColors.put("blue", Color.BLUE);
+		defaultColors.put("black", Color.BLACK);
+		defaultColors.put("white", Color.WHITE);
+		defaultColors.put("pink", Color.PINK);
+		defaultColors.put("orange", Color.ORANGE);
+		defaultColors.put("magenta", Color.MAGENTA);
 	}
 
-	public static void createTheme(String name, Color background, Color error, Color command, Color info) {
-		Theme theme = new Theme(name, background, error, command, info);
+	public static void createTheme(String name, Color background, Color command, Color info, Color error) {
+		Theme theme = new Theme(name, background, command, info, error);
 
-		if(!themes.containsKey(name)){
+		if (!themes.containsKey(name)) {
 			themes.put(name, theme);
 			Console.println("Successfully created a theme with the name \"" + name + "\"");
 		} else {
@@ -38,7 +45,15 @@ public class Theme {
 		}
 	}
 
-	private Theme(String name, Color background, Color error, Color command, Color info) {
+	public static void createColor(String name, int r, int g, int b) {
+		Color color = new Color(r, g, b);
+		if (!colors.containsKey(name)) {
+			colors.put(name, color);
+			Console.println("Color " + name + "(" + r + ", " + g + ", " + b + ") has been created");
+		}
+	}
+
+	private Theme(String name, Color background, Color command, Color info, Color error) {
 		this.name = name;
 		this.background = background;
 		this.error = error;
@@ -47,7 +62,7 @@ public class Theme {
 	}
 
 	public static Theme getTheme(String name) {
-		if(themes.containsKey(name)) {
+		if (themes.containsKey(name)) {
 			return themes.get(name);
 		}
 		return null;
