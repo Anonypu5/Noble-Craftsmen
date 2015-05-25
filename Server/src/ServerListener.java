@@ -17,11 +17,14 @@ public class ServerListener implements ConnectionListener{
     }
 
     public void receive(byte[] data, Connection from) {
-
+        Console.println("Received message \""+new String(data)+"\" from unaligned connection");
     }
 
     public void clientConnected(ServerConnection conn) {
-        Console.println("Client connected on IP: "+conn.getIP());
-
+        Console.println("Client connected on IP: " + conn.getIP());
+        ConnectionListenerClass clc = new ConnectionListenerClass();
+        clc.conn = conn;
+        conn.setConnectionListener(clc);
+        list.add(clc);
     }
 }

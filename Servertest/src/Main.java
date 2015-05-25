@@ -1,6 +1,7 @@
 import jexxus.client.ClientConnection;
 import jexxus.common.Connection;
 import jexxus.common.ConnectionListener;
+import jexxus.common.Delivery;
 import jexxus.server.ServerConnection;
 
 import javax.swing.*;
@@ -32,5 +33,6 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        conn.send(JOptionPane.showInputDialog("Enter a name").getBytes(), Delivery.RELIABLE);
     }
 }
