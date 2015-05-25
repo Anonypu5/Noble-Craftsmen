@@ -6,10 +6,26 @@ import java.util.HashMap;
  */
 public class Theme {
 
+	public static HashMap<String, Color> colors = new HashMap<>();
 	public static HashMap<String, Theme> themes = new HashMap<>();
 
 	private String name;
 	private Color background, error, command, info;
+
+	public static void init() {
+		colors.put("gray", Color.GRAY);
+		colors.put("light_gray", Color.LIGHT_GRAY);
+		colors.put("dark_gray", Color.DARK_GRAY);
+		colors.put("cyan", Color.CYAN);
+		colors.put("red", Color.RED);
+		colors.put("green", Color.GREEN);
+		colors.put("blue", Color.BLUE);
+		colors.put("black", Color.BLACK);
+		colors.put("white", Color.WHITE);
+		colors.put("pink", Color.PINK);
+		colors.put("ORANGE", Color.ORANGE);
+		colors.put("pink", Color.PINK);
+	}
 
 	public static void createTheme(String name, Color background, Color error, Color command, Color info) {
 		Theme theme = new Theme(name, background, error, command, info);

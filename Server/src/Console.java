@@ -83,6 +83,24 @@ public class Console {
 			}
 		});
 
+		commands.add(new Command("createtheme") {
+			public void run(String args) {
+				String[] args =
+			}
+		});
+
+		commands.add(new Command("settheme") {
+			public void run(String args) {
+
+			}
+		});
+
+		commands.add(new Command("gettheme") {
+			public void run(String args) {
+
+			}
+		});
+
 		frame = new JFrame("NC-ServerClass");
 		frame.setSize(800, 600);
 		frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
