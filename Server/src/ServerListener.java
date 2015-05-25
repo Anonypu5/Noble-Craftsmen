@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ServerListener implements ConnectionListener{
 
-    public static List<ServerConnection> conns = new ArrayList<ServerConnection>();
+    List<ConnectionListenerClass> list = new ArrayList<ConnectionListenerClass>();
 
     public void connectionBroken(Connection broken, boolean forced) {
 
@@ -22,6 +22,6 @@ public class ServerListener implements ConnectionListener{
 
     public void clientConnected(ServerConnection conn) {
         Console.println("Client connected on IP: "+conn.getIP());
-        conns.add(conn);
+
     }
 }

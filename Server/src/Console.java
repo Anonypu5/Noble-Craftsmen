@@ -36,9 +36,6 @@ public class Console {
 		commands.add(new Command("echo") {
 			public void run(String args) {
 				if(ServerClass.running){
-					for(int i = 0; i < ServerListener.conns.size(); i++){
-						ServerListener.conns.get(i).send(args.trim().getBytes(),Delivery.RELIABLE);
-					}
 					Console.println("Echoed \"" + args.trim() + "\"");
 				}else{
 					Console.printErr("Server not running");
