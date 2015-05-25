@@ -1,10 +1,13 @@
 #version 120
 
-attribute vec3 position;
+uniform mat4 modelView;
 
-varying vec3 pos;
+attribute vec3 attr_Position;
+attribute vec2 texCoord;
 
-void main(){
-	pos = position;
-    gl_Position = vec4(position, 1.0);
+varying vec2 texturePos;
+
+void main() {
+	texturePos = texCoord;
+    gl_Position = gl_ProjectionMatrix * modelView * vec4(attr_Position, 1.0);
 }

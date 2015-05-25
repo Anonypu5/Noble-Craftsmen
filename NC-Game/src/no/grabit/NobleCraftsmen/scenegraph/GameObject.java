@@ -1,6 +1,7 @@
 package no.grabit.NobleCraftsmen.scenegraph;
 
 import no.grabit.NobleCraftsmen.physics.Transform;
+import org.lwjgl.util.vector.Matrix4f;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
  * Created by Ole on 23/05/2015.
  */
 public class GameObject implements Serializable {
+	private static final long serialVersionUID = 2L;
 
 	/**
 	 * GameObject class.
@@ -18,18 +20,23 @@ public class GameObject implements Serializable {
 
 	private GameObject parent;
 	private Transform transform;
+	private final String tag;
 
 	private List<GameObject> children;
 	private List<GameComponent> components;
 
-	public GameObject() {
-		children = new ArrayList<GameObject>();
-		components = new ArrayList<GameComponent>();
+	public GameObject(String tag) {
+		this.tag = tag;
+		children = new ArrayList<>();
+		components = new ArrayList<>();
+		transform = new Transform();
 	}
 
-	public void updateObject() {}
+	protected void updateObject() {}
 
-	public void renderObject() {}
+	protected void renderObject() {}
+
+	protected void exitObject() {}
 
 	public final void update() {
 		updateObject();
@@ -53,41 +60,61 @@ public class GameObject implements Serializable {
 		}
 	}
 
-	public void add(GameObject child) {
+	public final void exit() {
+		exitObject();
+
+		for(GameComponent component : components) {
+			component.exit();
+		}
+		for(GameObject child : children) {
+			child.exit();
+		}
+	}
+
+	public final void add(GameObject child) {
 		if(child == null) return;
 		child.parent = this;
 		children.add(child);
 	}
 
-	public void remove(GameObject child) {
+	public final void remove(GameObject child) {
 		if(child == null) return;
 		child.parent = null;
 		if(children.contains(child))
 			children.remove(child);
 	}
 
-	public void add(GameComponent component) {
+	public final void add(GameComponent component) {
 		if(component == null) return;
 		component.setParent(this);
 		components.add(component);
 	}
 
-	public void remove(GameComponent component) {
+	public final void remove(GameComponent component) {
 		if(component == null) return;
 		component.setParent(null);
 		if(components.contains(component))
 			components.remove(component);
 	}
 
-	public Transform getTransform() {
+	public final Transform getTransform() {
 		return transform;
 	}
 
-	public GameObject getParent() {
+	public final Matrix4f getModelView() {
+		Matrix4f modelView = getTransform().getModelView();
+
+		if(parent == null)
+			return modelView;
+		else
+			return Matrix4f.mul(parent.getModelView(), modelView, null);
+	}
+
+	public final GameObject getParent() {
 		return parent;
 	}
 
-	public GameObject getRoot() {
+	public final GameObject getRoot() {
 		GameObject cur = this;
 		while(true) {
 			if(cur.parent == null)
@@ -96,6 +123,10 @@ public class GameObject implements Serializable {
 			cur = cur.parent;
 		}
 		return cur;
+	}
+
+	public String getTag() {
+		return tag;
 	}
 
 }
