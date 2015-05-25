@@ -1,3 +1,7 @@
+import jexxus.common.Delivery;
+import jexxus.server.Server;
+import jexxus.server.ServerConnection;
+
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -9,8 +13,6 @@ import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -33,7 +35,20 @@ public class Console {
 	public Console() {
 		commands.add(new Command("echo") {
 			public void run(String args) {
-				Console.println("Echoed \"" + args.trim() + "\"");
+				if(ServerClass.running){
+					for(int i = 0; i < ServerListener.conns.size(); i++){
+						ServerListener.conns.get(i).send(args.trim().getBytes(),Delivery.RELIABLE);
+					}
+					Console.println("Echoed \"" + args.trim() + "\"");
+				}else{
+					Console.printErr("Server not running");
+				}
+			}
+		});
+
+		commands.add(new Command("stop") {
+			public void run(String args) {
+				ServerClass.stop();
 			}
 		});
 
@@ -56,13 +71,13 @@ public class Console {
 			}
 		});
 
-		commands.add(new Command("getport") {
+		commands.add(new Command("start") {
 			public void run(String args) {
-				Console.println("Port = "+Save.port);
+				new Thread(new ServerClass(),"ServerClass").start();
 			}
 		});
 
-		frame = new JFrame("NC-Server");
+		frame = new JFrame("NC-ServerClass");
 		frame.setSize(800, 600);
 		frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {

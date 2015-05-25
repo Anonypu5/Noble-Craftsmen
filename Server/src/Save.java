@@ -10,7 +10,7 @@ public class Save {
     public static String osd, os, folder;
 
     public static int port;
-    public static String name = "NC-Server";
+    public static String name = "NC-ServerClass";
 
     public Save(){
         List<String> list = new ArrayList<String>();
@@ -21,12 +21,12 @@ public class Save {
 
         if(os.startsWith("Windows")){
             osd = "\\";
-            folder = System.getProperty("user.home")+"\\AppData\\Roaming\\.NC-Server";
+            folder = System.getProperty("user.home")+"\\AppData\\Roaming\\.NC-ServerClass";
         }else if(os.startsWith("Mac")){
             osd = "/";
-            folder = System.getProperty("user.home")+"/NC-Server";
+            folder = System.getProperty("user.home")+"/NC-ServerClass";
         }else {
-            Console.println("NC-Server Does not currently support this platform");
+            Console.println("NC-ServerClass Does not currently support this platform");
         }
 
         File dir = new File(folder);
