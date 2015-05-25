@@ -12,7 +12,7 @@ public class Save {
     public static int port;
     public static String name = "NC-ServerClass";
 
-    public Save(){
+    public Save() {
         List<String> list = new ArrayList<String>();
         Object a = list;
 
