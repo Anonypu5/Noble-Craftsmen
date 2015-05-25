@@ -22,40 +22,10 @@ import java.util.List;
 public class Console {
 
 	private static List<Command> commands = new ArrayList<>();
-	private static String name;
 	private static JFrame frame;
 	private static JTextPane textPane;
 	private static StyledDocument document;
 	private static Style style;
-<<<<<<< HEAD
-    private static JTextField textField;
-    private static boolean nextRequested;
-    private static String request = "";
-
-    public Console(){
-        frame = new JFrame("NC-Server");
-        frame.setSize(800, 600);
-        frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
-        frame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent windowEvent) {
-                exit();
-            }
-        });
-
-		commands.add(new Command("echo") {
-            public void run(String args) {
-                Console.println("Echoed \"" + args + "\"");
-            }
-        });
-
-		commands.add(new Command("setname") {
-            public void run(String args) {
-                Console.name = args.trim().split(" ")[0];
-                Console.println("set name to \"" + Console.name + "\"");
-            }
-        });
-
-=======
 	private static JTextField textField;
 	private static boolean nextRequested;
 	private static String request = "";
@@ -63,14 +33,32 @@ public class Console {
 	public Console() {
 		commands.add(new Command("echo") {
 			public void run(String args) {
-				Console.println("Echoed \"" + args + "\"");
+				Console.println("Echoed \"" + args.trim() + "\"");
+			}
+		});
+
+		commands.add(new Command("savesettings") {
+			public void run(String args) {
+				Save.saveSettings();
 			}
 		});
 
 		commands.add(new Command("setname") {
 			public void run(String args) {
-				Console.name = args.trim().split(" ")[0];
-				Console.println("set name to \"" + Console.name + "\"");
+				Save.name = args.trim().split(" ")[0];
+				Console.println("set name to \"" + Save.name + "\"");
+			}
+		});
+
+		commands.add(new Command("getname") {
+			public void run(String args) {
+				Console.println("Name = "+Save.name);
+			}
+		});
+
+		commands.add(new Command("getport") {
+			public void run(String args) {
+				Console.println("Port = "+Save.port);
 			}
 		});
 
@@ -85,7 +73,6 @@ public class Console {
 				System.exit(0);
 			}
 		});
->>>>>>> origin/master
 
 		textPane = new JTextPane();
 		textPane.setEditable(false);
@@ -135,7 +122,6 @@ public class Console {
 		println(text, Color.RED);
 	}
 
-<<<<<<< HEAD
     public static void exit(){
         println("Saving...");
         println("See you soon, captain :)");
@@ -143,20 +129,18 @@ public class Console {
         System.exit(0);
     }
 
-=======
->>>>>>> origin/master
 	public static void doCommand(String commandString) {
 		String start = commandString.trim().split(" ")[0].toLowerCase();
 		boolean foundCommand = false;
 		for (Command command : commands) {
 			if (command.getName().equals(start)) {
-				command.run(commandString.substring(start.length() + 1));
+				command.run(commandString.substring(start.length()));
 				foundCommand = true;
 				break;
 			}
 		}
 		if(!foundCommand)
-			printErr("No such command: \"" + start + "\n");
+			printErr("No such command: \"" + start + "\"");
 	}
 
 	public static String requestNext() {

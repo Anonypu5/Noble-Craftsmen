@@ -1,13 +1,6 @@
-
-import com.sun.org.apache.xml.internal.serializer.SerializationHandler;
-
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.Object.*;
 
 /**
  * Created by Elias on 5/23/2015.
@@ -15,6 +8,9 @@ import java.lang.Object.*;
 public class Save {
 
     public static String osd, os, folder;
+
+    public static int port;
+    public static String name = "NC-Server";
 
     public Save(){
         List<String> list = new ArrayList<String>();
@@ -33,46 +29,70 @@ public class Save {
             Console.println("NC-Server Does not currently support this platform");
         }
 
-        java.io.File file = new java.io.File(folder);
-        if(!file.exists()){
-            Console.println("Could not find any directory at \""+folder+"\", would you like to create a new server or set new directory path: create/new?");
-            String answer = Console.requestNext();
-            while(!answer.equals("create")&&!answer.equals("new")){
-                Console.printErr("Please write new or create");
-                answer = Console.requestNext();
-            }
-
-            if(answer.equals("create")){
-                file.mkdirs();
-            }
+        File dir = new File(folder);
+        if(!dir.exists()){
+            dir.mkdirs();
         }
-
-        Console.println("\nListing files in chosen directory \""+folder+"\":");
-        for(String x: file.list()){
-            Console.println("    - "+x);
-        }
-        Console.println("Done\n");
-
-        if(!new java.io.File(file.getPath()+"Settings.ncs").exists()){
-            Console.println("Creating Settings.ncs with following settings:" +
-                    "\n    - Port: 1999" +
-                    "\n");
-            creatingSettings(1999);
+        dir = new File(dir.getPath()+osd+"Settings.ncs");
+        if(!dir.exists()){
+            Console.println("Creating and saving settings...");
+            port = 1999;
+            saveSettings();
+        }else{
+            loadSettings();
         }
     }
 
-    public void creatingSettings(int port){
-        File file = new File();
-        file.obj = new Object[1][2];
+    private void loadSettings() {
+        try {
+            FileInputStream i = new FileInputStream(folder+osd+"Settings.ncs");
+            long length = new File(folder+osd+"Settings.ncs").length();
+            byte[] bytes = new byte[(int)length];
+            i.read(bytes);
+            ByteArrayInputStream b = new ByteArrayInputStream(bytes);
+            ObjectInputStream o = new ObjectInputStream(b);
+            SaveFile file = (SaveFile) o.readObject();
+            port = (int) file.obj[0][1];
+            name = (String) file.obj[1][1];
+        } catch (Exception e) {
+            Console.printErr(e.toString());
+            for (StackTraceElement x: e.getStackTrace()){
+                Console.printErr("    "+x.toString());
+            }
+            e.printStackTrace();
+            Console.println("The process above failed, due to the error above \n Do you want to try again y/n?");
+            String awnser = Console.requestNext();
+            while(!awnser.equals("y")&&!awnser.equals("n")){
+                Console.println("Please write y or n");
+                awnser = Console.requestNext();
+            }
+            if(awnser.equals("y")){
+                loadSettings();
+            }else{
+                Console.exit();
+            }
+        }
+    }
+
+    public static void saveSettings(){
+        Console.println("Saved settings:" +
+                "\nPort: "+Save.port+
+                "\nName: "+Save.name);
+        SaveFile file = new SaveFile();
+        file.obj = new Object[2][2];
         file.obj[0][0] = "Port";
         file.obj[0][1] = port;
+        file.obj[1][0] = "Name";
+        file.obj[1][1] = name;
         byte[] bytes;
         try {
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             ObjectOutputStream o = new ObjectOutputStream(b);
             o.writeObject(file);
             bytes = b.toByteArray();
-            throw new Exception("your mum");
+            FileOutputStream fos = new FileOutputStream(folder+osd+"Settings.ncs");
+            fos.write(bytes);
+            fos.close();
         }catch(Exception e){
             Console.printErr(e.toString());
             for (StackTraceElement x: e.getStackTrace()){
@@ -86,7 +106,7 @@ public class Save {
                 awnser = Console.requestNext();
             }
             if(awnser.equals("y")){
-                creatingSettings(port);
+                saveSettings();
             }else{
                 Console.exit();
             }
@@ -94,7 +114,7 @@ public class Save {
 
     }
 
-}class File implements Serializable {
+}class SaveFile implements Serializable {
     static final long serialVersionUID = 1L;
     Object obj[][] = new Object[0][];
 }
