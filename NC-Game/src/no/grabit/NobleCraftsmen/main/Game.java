@@ -12,6 +12,15 @@ import org.lwjgl.input.Cursor;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Matrix4f;
+import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+
+import java.awt.*;
+import java.awt.Font;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URL;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -24,10 +33,22 @@ public class Game implements Runnable {
 
 	private GameObject root;
 	private GameComponent sprite;
+	TrueTypeFont font;
 
 	public void run() {
 		init();
 		initGame();
+
+		try {
+			URL url = Game.class.getResource("/fonts/JimNightshade-Regular.ttf");
+
+			File f = new File(url.toURI());
+			FileInputStream in = new FileInputStream(f);
+			Font javaFont = Font.createFont(Font.TRUETYPE_FONT, in);
+			font = new TrueTypeFont(javaFont, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		long lastTime = System.nanoTime();
 
@@ -38,6 +59,7 @@ public class Game implements Runnable {
 
 			update();
 			render();
+
 
 			handleDisplayUpdate();
 		}
@@ -57,7 +79,13 @@ public class Game implements Runnable {
 		glLoadIdentity();
 
 		Shader.basicShader.bind();
+		Matrix4f mat4 = new Matrix4f();
+		Matrix4f.setIdentity(mat4);
+		Shader.setUnfiformMat4f(mat4, "modelView");
+		font.drawString(0, 0.5f, "YEAH", Color.transparent);
+
 		root.render();
+
 		Shader.unbind();
 	}
 
