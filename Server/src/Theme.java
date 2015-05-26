@@ -7,53 +7,114 @@ import java.util.HashMap;
  */
 public class Theme implements Serializable {
 
-	private static HashMap<String, Color> defaultColors = new HashMap<>();
-	private static HashMap<String, Color> colors = new HashMap<>();
+	private static Theme currentTheme;
+	private static HashMap<String, ThemeColor> defaultColors = new HashMap<>();
+	private static HashMap<String, ThemeColor> colors = new HashMap<>();
+	private static HashMap<String, Theme> defaultThemes = new HashMap<>();
 	private static HashMap<String, Theme> themes = new HashMap<>();
 	private static boolean initialized;
 
 	private String name;
-	private Color background, error, command, info;
+	private ThemeColor background, error, command, info;
 
 	public static void init() {
 		if (initialized)
 			return;
 		initialized = true;
 
-		defaultColors.put("gray", Color.GRAY);
-		defaultColors.put("light_gray", Color.LIGHT_GRAY);
-		defaultColors.put("dark_gray", Color.DARK_GRAY);
-		defaultColors.put("cyan", Color.CYAN);
-		defaultColors.put("red", Color.RED);
-		defaultColors.put("green", Color.GREEN);
-		defaultColors.put("blue", Color.BLUE);
-		defaultColors.put("black", Color.BLACK);
-		defaultColors.put("white", Color.WHITE);
-		defaultColors.put("pink", Color.PINK);
-		defaultColors.put("orange", Color.ORANGE);
-		defaultColors.put("magenta", Color.MAGENTA);
+		defaultColors.put("gray", ThemeColor.GRAY);
+		defaultColors.put("light_gray", ThemeColor.LIGHT_GRAY);
+		defaultColors.put("dark_gray", ThemeColor.DARK_GRAY);
+		defaultColors.put("cyan", ThemeColor.CYAN);
+		defaultColors.put("red", ThemeColor.RED);
+		defaultColors.put("yellow", ThemeColor.YELLOW);
+		defaultColors.put("green", ThemeColor.GREEN);
+		defaultColors.put("blue", ThemeColor.BLUE);
+		defaultColors.put("black", ThemeColor.BLACK);
+		defaultColors.put("white", ThemeColor.WHITE);
+		defaultColors.put("pink", ThemeColor.PINK);
+		defaultColors.put("orange", ThemeColor.ORANGE);
+		defaultColors.put("magenta", ThemeColor.MAGENTA);
+
+		Theme defaultTheme = new Theme("default", ThemeColor.BLACK, ThemeColor.BLUE, ThemeColor.GREEN, ThemeColor.RED);
+		defaultThemes.put("default", defaultTheme);
+		setTheme("default");
 	}
 
-	public static void createTheme(String name, Color background, Color command, Color info, Color error) {
-		Theme theme = new Theme(name, background, command, info, error);
-
+	public static void createTheme(String name, String background, String command, String info, String error) {
 		if (!themes.containsKey(name)) {
-			themes.put(name, theme);
+			themes.put(name, new Theme(name, getColor(background), getColor(command), getColor(info), getColor(error)));
 			Console.println("Successfully created a theme with the name \"" + name + "\"");
 		} else {
 			Console.printErr("A theme with the name \"" + name + "\" already exists");
 		}
 	}
 
-	public static void createColor(String name, int r, int g, int b) {
-		Color color = new Color(r, g, b);
-		if (!colors.containsKey(name)) {
-			colors.put(name, color);
-			Console.println("Color " + name + "(" + r + ", " + g + ", " + b + ") has been created");
+	public static void setTheme(String name) {
+				Theme theme = getTheme(name);
+				if(theme != null) {
+					currentTheme = theme;
+		} else {
+			Console.printErr("The theme \"" + name + "\" doesn't exist");
 		}
 	}
 
-	private Theme(String name, Color background, Color command, Color info, Color error) {
+	public static Theme getTheme(String name) {
+		if (defaultThemes.containsKey(name)) {
+			return defaultThemes.get(name);
+		} else if (themes.containsKey(name)) {
+			return themes.get(name);
+		}
+		return null;
+	}
+
+	public static void createColor(String name, int r, int g, int b) {
+		ThemeColor color = new ThemeColor(name, r, g, b);
+		if (!colors.containsKey(name)) {
+			colors.put(name, color);
+			Console.println("Color " + name + "(" + r + ", " + g + ", " + b + ") has been created");
+		} else {
+			Console.printErr("A color with the name \"" + name + "\" already exists");
+		}
+	}
+
+	public static void deleteColor(String name) {
+		if (colors.containsKey(name)) {
+			colors.remove(name);
+			Console.println("Color \"" + name + "\" has been deleted");
+		}
+	}
+
+	public static ThemeColor getColor(String name) {
+		if(defaultColors.containsKey(name)) {
+			return defaultColors.get(name);
+		} else if(colors.containsKey(name)) {
+			return colors.get(name);
+		}
+		System.out.println("plis");
+		return null;
+	}
+
+	public static boolean doesColorExist(String name) {
+		return defaultColors.containsKey(name) || colors.containsKey(name);
+	}
+
+	public static boolean doesThemeExist(String name) {
+		return defaultThemes.containsKey(name) || themes.containsKey(name);
+	}
+
+	public static void displayColors() {
+		Console.println("current existing colors");
+		for(ThemeColor color : defaultColors.values()) {
+
+		}
+	}
+
+	public static void saveThemesAndColors() {
+
+	}
+
+	private Theme(String name, ThemeColor background, ThemeColor command, ThemeColor info, ThemeColor error) {
 		this.name = name;
 		this.background = background;
 		this.error = error;
@@ -61,31 +122,62 @@ public class Theme implements Serializable {
 		this.info = info;
 	}
 
-	public static Theme getTheme(String name) {
-		if (themes.containsKey(name)) {
-			return themes.get(name);
-		}
-		return null;
+	public static String getCurrentThemeName() {
+		return currentTheme.name;
+	}
+
+	public static Color getErrorColor() {
+		return currentTheme.error.getColor();
+	}
+
+	public static Color getInfoColor() {
+		return currentTheme.info.getColor();
+	}
+
+	public static Color getCommandColor() {
+		return currentTheme.command.getColor();
+	}
+
+	public static Color getBackgroundColor() {
+		return currentTheme.background.getColor();
+	}
+
+}
+
+class ThemeColor {
+	public static final ThemeColor GRAY = new ThemeColor("gray", Color.GRAY);
+	public static final ThemeColor LIGHT_GRAY = new ThemeColor("light_gray", Color.LIGHT_GRAY);
+	public static final ThemeColor DARK_GRAY = new ThemeColor("dark_gray", Color.DARK_GRAY);
+	public static final ThemeColor CYAN = new ThemeColor("cyan", Color.CYAN);
+	public static final ThemeColor RED = new ThemeColor("red", Color.RED);
+	public static final ThemeColor YELLOW = new ThemeColor("yellow", Color.YELLOW);
+	public static final ThemeColor GREEN = new ThemeColor("green", Color.GREEN);
+	public static final ThemeColor BLUE = new ThemeColor("blue", Color.BLUE);
+	public static final ThemeColor BLACK = new ThemeColor("black", Color.BLACK);
+	public static final ThemeColor WHITE = new ThemeColor("white", Color.WHITE);
+	public static final ThemeColor PINK = new ThemeColor("pink", Color.PINK);
+	public static final ThemeColor ORANGE = new ThemeColor("orange", Color.ORANGE);
+	public static final ThemeColor MAGENTA = new ThemeColor("magenta", Color.MAGENTA);
+
+	private Color color;
+	private String name;
+
+	public ThemeColor(String name, int r, int g, int b) {
+		this.name = name;
+		this.color = new Color(r, g, b);
+	}
+
+	public ThemeColor(String name, Color color) {
+		this.name = name;
+		this.color = color;
+	}
+
+	public Color getColor() {
+		return color;
 	}
 
 	public String getName() {
 		return name;
-	}
-
-	public Color getBackground() {
-		return background;
-	}
-
-	public Color getError() {
-		return error;
-	}
-
-	public Color getCommand() {
-		return command;
-	}
-
-	public Color getInfo() {
-		return info;
 	}
 
 }

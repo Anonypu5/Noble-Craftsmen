@@ -86,23 +86,54 @@ public class Console {
 			public void run(String args) {
 				String[] arguments = args.trim().split(" ");
 				if(arguments.length < 5) {
-					Console.printErr("Too few arguments - follow the following template createtheme name backgroundCol commandCol infoCol errorCol");
+					Console.printErr("Too few arguments - follow the following template\n" +
+							" - createtheme name backgroundCol commandCol infoCol errorCol");
 				} else if(arguments.length > 5) {
-					Console.printErr("Too many arguments - follow the following template createtheme name backgroundCol commandCol infoCol errorCol");
+					Console.printErr("Too many arguments - follow the following template\n" +
+							" - createtheme name backgroundCol commandCol infoCol errorCol");
 				}
+
+				boolean foundError = false;
+
 				String name = arguments[0];
+
+				String background = arguments[1];
+				if(!Theme.doesColorExist(background)){
+					Console.printErr("The color \"" + background + "\" does not exist");
+					foundError = true;
+				}
+				String command = arguments[2];
+				if(!Theme.doesColorExist(command)){
+					Console.printErr("The color \"" + command + "\" does not exist");
+					foundError = true;
+				}
+				String info = arguments[3];
+				if(!Theme.doesColorExist(info)){
+					Console.printErr("The color \"" + info + "\" does not exist");
+					foundError = true;
+				}
+				String error = arguments[4];
+				if(!Theme.doesColorExist(error)){
+					Console.printErr("The color \"" + error + "\" does not exist");
+					foundError = true;
+				}
+
+				if(foundError)
+					return;
+
+				Theme.createTheme(name, background, command, info, error);
 			}
 		});
 
 		commands.add(new Command("settheme") {
 			public void run(String args) {
-
+				Theme.setTheme(args);
 			}
 		});
 
 		commands.add(new Command("gettheme") {
 			public void run(String args) {
-
+				Console.println("Current theme: " + Theme.getCurrentThemeName());
 			}
 		});
 
@@ -120,7 +151,7 @@ public class Console {
 
 		textPane = new JTextPane();
 		textPane.setEditable(false);
-		textPane.setBackground(Color.BLACK);
+		textPane.setBackground(Theme.getBackgroundColor());
 		document = textPane.getStyledDocument();
 		style = textPane.addStyle("Style all the things", null);
 		frame.add(new JScrollPane(textPane), BorderLayout.CENTER);
@@ -128,7 +159,7 @@ public class Console {
 		textField = new JTextField();
 		textField.addActionListener(e -> {
 			if (!e.getActionCommand().equals("")) {
-				println("> " + e.getActionCommand(), new Color(255, 0, 255));
+				println("> " + e.getActionCommand(), Theme.getCommandColor());
 				textField.setText("");
 
 				if (nextRequested) {
@@ -139,7 +170,7 @@ public class Console {
 			}
 		});
 		textField.setBackground(new Color(40, 40, 40));
-		textField.setCaretColor(Color.GREEN);
+		textField.setCaretColor(Theme.getInfoColor());
 		textField.setForeground(new Color(255, 0, 255));
 		frame.add(textField, BorderLayout.SOUTH);
 
@@ -150,7 +181,7 @@ public class Console {
 	}
 
 	public static void println(String text) {
-		println(text, Color.GREEN);
+		println(text, Theme.getInfoColor());
 	}
 
 	public static void println(String text, Color color) {
@@ -163,7 +194,7 @@ public class Console {
 	}
 
 	public static void printErr(String text) {
-		println(text, Color.RED);
+		println(text, Theme.getErrorColor());
 	}
 
     public static void exit(){
