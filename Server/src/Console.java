@@ -234,6 +234,14 @@ public class Console {
 		nextRequested = false;
 		return request;
 	}
+
+	public static void printStackTrace(Exception e){
+		Console.printErr(e.toString());
+		for (StackTraceElement x: e.getStackTrace()){
+			Console.printErr("    "+x.toString());
+		}
+		e.printStackTrace();
+	}
 }
 
 abstract class Command {
