@@ -5,4 +5,6 @@ package no.grabit.NCLauncher;
  */
 public class Launcher {
 
+
+
 }

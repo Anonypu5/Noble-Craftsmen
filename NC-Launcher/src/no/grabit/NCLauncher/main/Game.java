@@ -1,11 +1,8 @@
-package no.grabit.NobleCraftsmen.main;
+package no.grabit.NCLauncher.main;
 
-import no.grabit.NobleCraftsmen.graphics.Label;
-import no.grabit.NobleCraftsmen.graphics.Shader;
-import no.grabit.NobleCraftsmen.graphics.Sprite;
-import no.grabit.NobleCraftsmen.scenegraph.GameComponent;
-import no.grabit.NobleCraftsmen.scenegraph.GameObject;
-import no.grabit.NobleCraftsmen.util.Time;
+import no.grabit.NCLauncher.graphics.Label;
+import no.grabit.NCLauncher.graphics.Shader;
+import no.grabit.NCLauncher.scenegraph.GameObject;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.*;
@@ -24,7 +21,6 @@ public class Game implements Runnable {
 	public static final String TITLE = "Noble Craftsmen";
 
 	private GameObject root;
-	private GameComponent sprite;
 
 	public void run() {
 		init();
@@ -34,7 +30,6 @@ public class Game implements Runnable {
 
 		while(!Display.isCloseRequested()) {
 			long now = System.nanoTime();
-			Time.setDeltaTime(lastTime, now);
 			lastTime = now;
 
 			update();
@@ -43,22 +38,17 @@ public class Game implements Runnable {
 			handleDisplayUpdate();
 		}
 
-		root.exit();
-
 		Display.destroy();
 	}
 
 	private void update() {
-		root.update();
-		sprite.getTransform().getPosition().set(getMouseX(), getMouseY());
-//		sprite.getTransform().getPosition().set(Mouse.getX(), Mouse.getY());
 	}
 
 	private void render() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		Shader.basicShader.bind();
-		root.render();
+
 		Shader.unbind();
 	}
 
@@ -87,15 +77,9 @@ public class Game implements Runnable {
 
 	private void initGame() {
 		Label.init();
+		root = new GameObject("root");
 
-		root = new GameObject("Root");
-		sprite = new Sprite("test sprite", "/textures/Commando.png");
-		root.add(sprite);
-		Label label = new Label("testlabel", Label.medievalFont, "test", 200);
-		label.getTransform().getScale().set(0.001f, -0.001f);
-		root.add(label);
 
-		sprite.getTransform().setRotation(45f);
 	}
 
 	private static void initGL() {

@@ -1,6 +1,6 @@
-package no.grabit.NobleCraftsmen.graphics;
+package no.grabit.NCLauncher.graphics;
 
-import no.grabit.NobleCraftsmen.util.FileUtils;
+import no.grabit.NCLauncher.util.FileUtils;
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.BufferUtils;

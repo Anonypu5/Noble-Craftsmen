@@ -1,6 +1,6 @@
-package no.grabit.NobleCraftsmen.graphics;
+package no.grabit.NCLauncher.graphics;
 
-import no.grabit.NobleCraftsmen.scenegraph.GameComponent;
+import no.grabit.NCLauncher.scenegraph.GameComponent;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
