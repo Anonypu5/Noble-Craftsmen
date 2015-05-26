@@ -26,22 +26,22 @@ public abstract class GameComponent implements Serializable {
 
 	public abstract void exit();
 
-	public void setParent(GameObject parent) {
+	public final void setParent(GameObject parent) {
 		this.parent = parent;
 	}
 
-	public GameObject getParent() {
+	public final GameObject getParent() {
 		return parent;
 	}
 
-	public GameObject getRoot() {
+	public final GameObject getRoot() {
 		if(parent == null)
 			return null;
 
 		return parent.getRoot();
 	}
 
-	public Transform getTransform() {
+	public final Transform getTransform() {
 		return transform;
 	}
 
@@ -54,12 +54,12 @@ public abstract class GameComponent implements Serializable {
 			return Matrix4f.mul(parent.getModelView(), modelView, null);
 	}
 
-	public String getTag() {
+	public final String getTag() {
 		String[] tags = tag.split("\\.");
 		return tags[tags.length - 1];
 	}
 
-	public String getFullTag() {
+	public final String getFullTag() {
 		return tag;
 	}
 

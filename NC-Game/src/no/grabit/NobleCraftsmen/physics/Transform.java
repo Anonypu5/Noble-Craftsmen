@@ -11,24 +11,24 @@ public class Transform {
 
 	private static final Vector3f ROTATION_AXIS = new Vector3f(0.0f, 0.0f, 1.0f);
 
-	private Vector2f position;
+	private Vector3f position;
 	private float rotation;
 	private Vector2f scale;
 
 	public Transform() {
-		position = new Vector2f(0, 0);
+		position = new Vector3f(0f, 0f, 0f);
 		rotation = 0;
-		scale = new Vector2f(1, 1);
+		scale = new Vector2f(1f, 1f);
 	}
 
-	public Transform(float x, float y, float rotation_, float scaleX, float scaleY) {
-		this.position = new Vector2f(x, y);
+	public Transform(float x, float y, float z, float rotation_, float scaleX, float scaleY) {
+		this.position = new Vector3f(x, y, z);
 		this.rotation = rotation_;
 		this.scale = new Vector2f(scaleX, scaleY);
 	}
 
-	public Transform(Vector2f position_, float rotation_, Vector2f scale_) {
-		this.position = new Vector2f(position_);
+	public Transform(Vector3f position_, float rotation_, Vector2f scale_) {
+		this.position = new Vector3f(position_);
 		this.rotation = rotation_;
 		this.scale = new Vector2f(scale_);
 	}
@@ -43,12 +43,12 @@ public class Transform {
 		return modelView;
 	}
 
-	public Vector2f getPosition() {
+	public Vector3f getPosition() {
 		return position;
 	}
 
-	public void setPosition(Vector2f position) {
-		this.position = new Vector2f(position);
+	public void setPosition(Vector3f position) {
+		this.position = new Vector3f(position);
 	}
 
 	public float getRotation() {

@@ -1,5 +1,6 @@
 package no.grabit.NobleCraftsmen.main;
 
+import no.grabit.NobleCraftsmen.graphics.Label;
 import no.grabit.NobleCraftsmen.graphics.Shader;
 import no.grabit.NobleCraftsmen.graphics.Sprite;
 import no.grabit.NobleCraftsmen.scenegraph.GameComponent;
@@ -12,10 +13,6 @@ import org.lwjgl.input.Cursor;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -33,12 +30,6 @@ public class Game implements Runnable {
 		init();
 		initGame();
 
-		try {
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		long lastTime = System.nanoTime();
 
 		while(!Display.isCloseRequested()) {
@@ -48,7 +39,6 @@ public class Game implements Runnable {
 
 			update();
 			render();
-
 
 			handleDisplayUpdate();
 		}
@@ -60,20 +50,15 @@ public class Game implements Runnable {
 
 	private void update() {
 		root.update();
-		root.getTransform().getPosition().set(getMouseX(), getMouseY());
+		sprite.getTransform().getPosition().set(getMouseX(), getMouseY());
+//		sprite.getTransform().getPosition().set(Mouse.getX(), Mouse.getY());
 	}
 
 	private void render() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		Shader.basicShader.bind();
-		Matrix4f mat4 = new Matrix4f();
-		Matrix4f.setIdentity(mat4);
-		mat4.scale(new Vector3f(0.01f, 0.01f, 1f));
-		Shader.setUnfiformMat4f(mat4, "modelView");
-
 		root.render();
-
 		Shader.unbind();
 	}
 
@@ -101,19 +86,26 @@ public class Game implements Runnable {
 	}
 
 	private void initGame() {
+		Label.init();
+
 		root = new GameObject("Root");
+		Label label = new Label("testlabel", Label.medievalFont, "test", 32);
+		label.getTransform().getScale().set(0.01f, 0.01f);
+		root.add(label);
 		sprite = new Sprite("test sprite", "/textures/Commando.png");
 		root.add(sprite);
 
-		root.getTransform().setRotation(45f);
+		sprite.getTransform().setRotation(45f);
 	}
 
 	private static void initGL() {
 		glMatrixMode(GL11.GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(-((float)Display.getWidth() / (float) Display.getHeight()), ((float)Display.getWidth() / (float) Display.getHeight()), -1, 1, 1, -1);
+//		glOrtho(0, Display.getWidth(), Display.getHeight(), 0, -1, 1);
 		glMatrixMode(GL_MODELVIEW);
 		glClearColor(0.15f, 0.3f, 0.8f, 1.0f);
+//		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

@@ -125,7 +125,12 @@ public class GameObject implements Serializable {
 		return cur;
 	}
 
-	public String getTag() {
+	public final String getTag() {
+		String[] tags = tag.split("\\.");
+		return tags[tags.length - 1];
+	}
+
+	public final String getFullTag() {
 		return tag;
 	}
 
