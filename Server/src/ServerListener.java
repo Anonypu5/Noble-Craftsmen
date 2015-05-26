@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ServerListener implements ConnectionListener{
 
-    List<ConnectionListenerClass> list = new ArrayList<ConnectionListenerClass>();
+    public static List<ConnectionListenerClass> list = new ArrayList<ConnectionListenerClass>();
 
     public void connectionBroken(Connection broken, boolean forced) {
 
