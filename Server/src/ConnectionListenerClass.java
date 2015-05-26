@@ -35,6 +35,7 @@ public class ConnectionListenerClass implements ConnectionListener{
                         loggedIn = true;
                         Console.println("ip \""+conn.getIP()+"\" logged in as \""+usr+"\"");
                     }else{
+                        Console.println("ip \""+conn.getIP()+"\" tried to login as \""+usr+"\", but failed");
                         send("loginAnsw", new Object[][]{{0}});
                     }
                 }else{

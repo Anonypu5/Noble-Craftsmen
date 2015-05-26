@@ -13,7 +13,7 @@ import java.io.*;
 public class Main {
 
     public static boolean loggedIn;
-    public static ServerConnection conn = null;
+    public static ClientConnection conn = null;
 
     public static void main(String[] args) {
         ClientConnection conn = new ClientConnection(new ConnectionListener() {
@@ -40,7 +40,7 @@ public class Main {
                                 JOptionPane.showMessageDialog(null, "Wrong username or password");
                                 String usr = JOptionPane.showInputDialog("Username");
                                 String psw = JOptionPane.showInputDialog("Password");
-                                Main.send("login",new Object[][]{{usr},{psw}});
+                                Main.send("login",new Object[][]{{usr,psw}});
                             }
                         }else{
                         }
@@ -51,11 +51,12 @@ public class Main {
 
             @Override
             public void clientConnected(ServerConnection conn) {
-                Main.conn = conn;
+
             }
         }, "92.220.161.232", 1999, true);
         try {
             conn.connect();
+            Main.conn = conn;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,7 +91,7 @@ public class Main {
             byte[] bytes = b.toByteArray();
             conn.send(bytes, Delivery.RELIABLE);
         }catch(Exception e){
-
+            e.printStackTrace();
         }
     }
 } class Message implements Serializable {
