@@ -2,6 +2,7 @@ package no.grabit.NobleCraftsmen.graphics;
 
 import no.grabit.NobleCraftsmen.scenegraph.GameComponent;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
@@ -65,6 +66,10 @@ public class Label extends GameComponent {
 	}
 
 	public void update() {
+
+	}
+
+	public void centerOn(Vector2f expectedPos) {
 
 	}
 

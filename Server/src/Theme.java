@@ -36,7 +36,7 @@ public class Theme implements Serializable {
 		defaultColors.put("orange", ThemeColor.ORANGE);
 		defaultColors.put("magenta", ThemeColor.MAGENTA);
 
-		Theme defaultTheme = new Theme("default", ThemeColor.BLACK, ThemeColor.BLUE, ThemeColor.GREEN, ThemeColor.RED);
+		Theme defaultTheme = new Theme("default", ThemeColor.BLACK, ThemeColor.PINK, ThemeColor.GREEN, ThemeColor.RED);
 		defaultThemes.put("default", defaultTheme);
 		setTheme("default");
 	}

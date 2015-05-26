@@ -78,6 +78,8 @@ public class Console {
 
 		commands.add(new Command("setname") {
 			public void run(String args) {
+				if(args == null || args.equals(""))
+					return;
 				Save.name = args.trim().split(" ")[0];
 				Console.println("set name to \"" + Save.name + "\"");
 			}
@@ -192,7 +194,7 @@ public class Console {
 		});
 		textField.setBackground(new Color(40, 40, 40));
 		textField.setCaretColor(Theme.getInfoColor());
-		textField.setForeground(new Color(255, 0, 255));
+		textField.setForeground(Theme.getCommandColor());
 		frame.add(textField, BorderLayout.SOUTH);
 
 		frame.setVisible(true);
@@ -249,7 +251,7 @@ public class Console {
         println("Saving...");
         println("See you soon, captain :)");
         println("PS: We fucked your mum");
-        System.exit(0);
+		System.exit(0);
     }
 
 	public static void doCommand(String commandString) {
