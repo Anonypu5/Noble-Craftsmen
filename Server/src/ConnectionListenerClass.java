@@ -1,6 +1,7 @@
 import jexxus.common.Connection;
 import jexxus.common.ConnectionListener;
 import jexxus.common.Delivery;
+import jexxus.server.Server;
 import jexxus.server.ServerConnection;
 
 import java.io.*;
@@ -16,7 +17,6 @@ public class ConnectionListenerClass implements ConnectionListener{
 
     @Override
     public void connectionBroken(Connection broken, boolean forced) {
-        
     }
 
     @Override
@@ -34,6 +34,7 @@ public class ConnectionListenerClass implements ConnectionListener{
                         send("loginAnsw", new Object[][]{{1}});
                         loggedIn = true;
                         Console.println("ip \""+conn.getIP()+"\" logged in as \""+usr+"\"");
+                        name = usr;
                     }else{
                         Console.println("ip \""+conn.getIP()+"\" tried to login as \""+usr+"\", but failed");
                         send("loginAnsw", new Object[][]{{0}});

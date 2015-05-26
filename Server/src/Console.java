@@ -13,6 +13,8 @@ import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -28,18 +30,20 @@ public class Console {
 	private static JTextPane textPane;
 	private static StyledDocument document;
 	private static Style style;
-	private static JTextField textField;
+	public static JTextField textField;
 	private static boolean nextRequested;
 	private static String request = "";
+	public static List<String> typed = new ArrayList<String>();
+	public static int typedInt;
 
 	public Console() {
 		Theme.init();
 
 		commands.add(new Command("echo") {
 			public void run(String args) {
-				if(ServerClass.running){
+				if (ServerClass.running) {
 					Console.println("Echoed \"" + args.trim() + "\"");
-				}else{
+				} else {
 					Console.printErr("Server not running");
 				}
 			}
@@ -48,6 +52,21 @@ public class Console {
 		commands.add(new Command("stop") {
 			public void run(String args) {
 				ServerClass.stop();
+			}
+		});
+
+		commands.add(new Command("list") {
+			public void run(String args) {
+				for(int i = 0; i < ServerListener.list.size(); i++){
+					println(i + "    " + ServerListener.list.get(i).conn.getIP() + "    " + (ServerListener.list.get(i).loggedIn ? ServerListener.list.get(i).name : "not logged in"));
+				}
+			}
+		});
+
+		commands.add(new Command("restart") {
+			public void run(String args) {
+				ServerClass.stop();
+				new Thread(new ServerClass(),"ServerClass").start();
 			}
 		});
 
@@ -66,7 +85,7 @@ public class Console {
 
 		commands.add(new Command("getname") {
 			public void run(String args) {
-				Console.println("Name = "+Save.name);
+				Console.println("Name = " + Save.name);
 			}
 		});
 
@@ -166,7 +185,9 @@ public class Console {
 					request = e.getActionCommand();
 				} else {
 					doCommand(e.getActionCommand());
+					typed.add(e.getActionCommand());
 				}
+				typedInt = 0;
 			}
 		});
 		textField.setBackground(new Color(40, 40, 40));
@@ -177,6 +198,33 @@ public class Console {
 		frame.setVisible(true);
 
 		frame.requestFocus();
+		textField.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {
+
+			}
+
+			public void keyPressed(KeyEvent e) {
+
+			}
+
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					if (Console.typedInt < Console.typed.size()) {
+						Console.typedInt++;
+					}
+					Console.textField.setText(Console.typed.get(Console.typed.size() - Console.typedInt));
+				} else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+					if (Console.typedInt > 0) {
+						Console.typedInt--;
+					}
+					if(Console.typedInt > 0){
+						Console.textField.setText(Console.typed.get(Console.typed.size() - Console.typedInt));
+					} else {
+						Console.textField.setText("");
+					}
+				}
+			}
+		});
 		textField.requestFocusInWindow();
 	}
 
