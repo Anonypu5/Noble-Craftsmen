@@ -2,6 +2,8 @@ import jexxus.common.Connection;
 import jexxus.common.ConnectionListener;
 import jexxus.server.ServerConnection;
 
+import java.io.Serializable;
+
 /**
  * Created by Elias on 5/25/2015.
  */
@@ -17,12 +19,13 @@ public class ConnectionListenerClass implements ConnectionListener{
 
     @Override
     public void receive(byte[] data, Connection from) {
-        name = new String (data);
-        Console.println("Assigning ip \""+conn.getIP()+"\" the name \""+name+"\"");
     }
 
     @Override
     public void clientConnected(ServerConnection conn) {
 
     }
+} class Message implements Serializable{
+    public final long serialVersionUID = 1L;
+    Object obj[];
 }

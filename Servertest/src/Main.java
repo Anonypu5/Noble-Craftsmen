@@ -5,12 +5,18 @@ import jexxus.common.Delivery;
 import jexxus.server.ServerConnection;
 
 import javax.swing.*;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * Created by Elias on 5/25/2015.
  */
 public class Main {
+
+    public static boolean loggedIn;
+
     public static void main(String[] args) {
         ClientConnection conn = new ClientConnection(new ConnectionListener() {
             @Override
@@ -20,7 +26,7 @@ public class Main {
 
             @Override
             public void receive(byte[] data, Connection from) {
-                JOptionPane.showMessageDialog(null, new String(data));
+
             }
 
             @Override
@@ -33,6 +39,23 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        conn.send(JOptionPane.showInputDialog("Enter a name").getBytes(), Delivery.RELIABLE);
+        while(loggedIn){
+            String usr = JOptionPane.showInputDialog("Username");
+            String psw = JOptionPane.showInputDialog("Password");
+            Message message = new Message();
+            message.obj = new Object[2][2];
+            try {
+                ByteArrayOutputStream b = new ByteArrayOutputStream();
+                ObjectOutputStream o = new ObjectOutputStream(b);
+                o.writeObject(file);
+                byte[] bytes = b.toByteArray();
+            }catch(Exception e){
+
+            }
+        }
     }
+} class Message implements Serializable {
+    public final long serialVersionUID = 1L;
+    String tittle;
+    Object obj[][];
 }
