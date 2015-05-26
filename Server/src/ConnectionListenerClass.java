@@ -17,6 +17,12 @@ public class ConnectionListenerClass implements ConnectionListener{
 
     @Override
     public void connectionBroken(Connection broken, boolean forced) {
+        for(int i = 0; i < ServerListener.list.size(); i++){
+            if(ServerListener.list.get(i).equals(this)){
+                Console.println("Player (" + i + ", " + ServerListener.list.get(i).conn.getIP() + ", " + (ServerListener.list.get(i).loggedIn ? ServerListener.list.get(i).name : "not logged in")+") left the server");
+                ServerListener.list.remove(i);
+            }
+        }
     }
 
     @Override
