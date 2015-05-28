@@ -39,6 +39,10 @@ public class Theme implements Serializable {
 		Theme defaultTheme = new Theme("default", ThemeColor.BLACK, ThemeColor.PINK, ThemeColor.GREEN, ThemeColor.RED);
 		defaultThemes.put("default", defaultTheme);
 		setTheme("default");
+
+		SaveFile saveFile = Save.openSaveFile("themes.ncs");
+		themes = (HashMap<String, Theme>) saveFile.obj[0][0];
+		colors = (HashMap<String, ThemeColor>) saveFile.obj[0][1];
 	}
 
 	public static void createTheme(String name, String background, String command, String info, String error) {
@@ -51,9 +55,10 @@ public class Theme implements Serializable {
 	}
 
 	public static void setTheme(String name) {
-				Theme theme = getTheme(name);
-				if(theme != null) {
-					currentTheme = theme;
+		Theme theme = getTheme(name);
+		if (theme != null) {
+			currentTheme = theme;
+			Console.println("Theme set to: " + currentTheme);
 		} else {
 			Console.printErr("The theme \"" + name + "\" doesn't exist");
 		}
@@ -86,9 +91,9 @@ public class Theme implements Serializable {
 	}
 
 	public static ThemeColor getColor(String name) {
-		if(defaultColors.containsKey(name)) {
+		if (defaultColors.containsKey(name)) {
 			return defaultColors.get(name);
-		} else if(colors.containsKey(name)) {
+		} else if (colors.containsKey(name)) {
 			return colors.get(name);
 		}
 		System.out.println("plis");
@@ -103,15 +108,40 @@ public class Theme implements Serializable {
 		return defaultThemes.containsKey(name) || themes.containsKey(name);
 	}
 
-	public static void displayColors() {
-		Console.println("current existing colors");
-		for(ThemeColor color : defaultColors.values()) {
+	public static void printColors() {
+		Console.println("current existing colors:");
+		int index = 0;
+		for (ThemeColor color : defaultColors.values()) {
+			index++;
+			Console.println("    -" + index + "  -  " + color.getName() + "(" + color.getColor().getRed() + ", " + color.getColor().getGreen() + ", " + color.getColor().getBlue() + ")");
+		}
+		for (ThemeColor color : colors.values()) {
+			index++;
+			Console.println("    -" + index + "  -  " + color.getName() + "(" + color.getColor().getRed() + ", " + color.getColor().getGreen() + ", " + color.getColor().getBlue() + ")");
+		}
+	}
 
+	public static void printThemes() {
+		Console.println("current existing themes:");
+		int index = 0;
+		for (Theme theme : defaultThemes.values()) {
+			index++;
+			Console.println("    -" + index + "  -  " + theme.name + "(" + theme.background + ", " + theme.command + ", " + theme.info + ", " + theme.error + ")");
+		}
+		for (Theme theme : themes.values()) {
+			index++;
+			Console.println("    -" + index + "  -  " + theme.name + "(" + theme.background + ", " + theme.command + ", " + theme.info + ", " + theme.error + ")");
 		}
 	}
 
 	public static void saveThemesAndColors() {
+		SaveFile saveFile = new SaveFile();
+		saveFile.obj = new Object[1][2];
+		saveFile.obj[0][0] = themes;
+		saveFile.obj[0][1] = colors;
+		Save.saveFile(saveFile, "themes.ncs");
 
+		Console.println("Saved themes and colors");
 	}
 
 	private Theme(String name, ThemeColor background, ThemeColor command, ThemeColor info, ThemeColor error) {

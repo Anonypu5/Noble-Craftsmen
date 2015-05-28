@@ -1,6 +1,7 @@
 package no.grabit.NobleCraftsmen.graphics;
 
 import no.grabit.NobleCraftsmen.scenegraph.GameComponent;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.SlickException;
@@ -69,10 +70,6 @@ public class Label extends GameComponent {
 
 	}
 
-	public void centerOn(Vector2f expectedPos) {
-
-	}
-
 	public void render() {
 		Texture.unbind();
 		Shader curShader = Shader.getCurShader();
@@ -80,6 +77,8 @@ public class Label extends GameComponent {
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glLoadIdentity();
 		GL11.glScalef(getTransform().getScale().getX(), getTransform().getScale().getY(), 1f);
+		GL11.glTranslatef(-font.getWidth(text) / 2, -font.getLineHeight() / 2, 0);
+		GL11.glTranslatef(getTransform().getPosition().getX() * 600f * 5f / 3f, -600 * 5 / 3 * getTransform().getPosition().getY(), 0);
 		font.drawString(0, 0, text, org.newdawn.slick.Color.yellow);
 		GL11.glLoadIdentity();
 		curShader.bind();

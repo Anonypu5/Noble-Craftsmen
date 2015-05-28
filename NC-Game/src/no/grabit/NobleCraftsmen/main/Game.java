@@ -40,7 +40,7 @@ public class Game implements Runnable {
 			update();
 			render();
 
-			handleDisplayUpdate();
+			handleDisplay();
 		}
 
 		root.exit();
@@ -51,7 +51,6 @@ public class Game implements Runnable {
 	private void update() {
 		root.update();
 		sprite.getTransform().getPosition().set(getMouseX(), getMouseY());
-//		sprite.getTransform().getPosition().set(Mouse.getX(), Mouse.getY());
 	}
 
 	private void render() {
@@ -60,6 +59,25 @@ public class Game implements Runnable {
 		Shader.basicShader.bind();
 		root.render();
 		Shader.unbind();
+
+		glBegin(GL_LINES);
+		glColor3f(1, 0, 0);
+		glVertex2f( 0, -1);
+		glColor3f(1, 0, 0);
+		glVertex2f( 0,  1);
+		glColor3f(1, 0, 0);
+		glVertex2f(-((float)Display.getWidth()/(float)Display.getHeight()),  0);
+		glColor3f(1, 0, 0);
+		glVertex2f( ((float)Display.getWidth()/(float)Display.getHeight()),  0);
+		glColor3f(1, 0, 0);
+		glVertex2f(-((float)Display.getWidth()/(float)Display.getHeight()),  -0.5f);
+		glColor3f(1, 0, 0);
+		glVertex2f( ((float)Display.getWidth()/(float)Display.getHeight()),  -0.5f);
+		glColor3f(1, 0, 0);
+		glVertex2f(-((float)Display.getWidth()/(float)Display.getHeight()),  0.5f);
+		glColor3f(1, 0, 0);
+		glVertex2f( ((float)Display.getWidth()/(float)Display.getHeight()),  0.5f);
+		glEnd();
 	}
 
 	public static void main(String[] args) {
@@ -67,7 +85,7 @@ public class Game implements Runnable {
 		new Thread(game, "main loop").start();
 	}
 
-	private void handleDisplayUpdate() {
+	private void handleDisplay() {
 		Display.update();
 
 		if(Display.wasResized()) {
@@ -91,8 +109,9 @@ public class Game implements Runnable {
 		root = new GameObject("Root");
 		sprite = new Sprite("test sprite", "/textures/Commando.png");
 		root.add(sprite);
-		Label label = new Label("testlabel", Label.medievalFont, "test", 200);
+		Label label = new Label("testlabel", Label.medievalFont, "testtest", 200);
 		label.getTransform().getScale().set(0.001f, -0.001f);
+		label.getTransform().getPosition().set(0f, 0f);
 		root.add(label);
 
 		sprite.getTransform().setRotation(45f);
@@ -102,10 +121,8 @@ public class Game implements Runnable {
 		glMatrixMode(GL11.GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(-((float)Display.getWidth() / (float) Display.getHeight()), ((float)Display.getWidth() / (float) Display.getHeight()), -1, 1, 1, -1);
-//		glOrtho(0, Display.getWidth(), Display.getHeight(), 0, -1, 1);
 		glMatrixMode(GL_MODELVIEW);
 		glClearColor(0.15f, 0.3f, 0.8f, 1.0f);
-//		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

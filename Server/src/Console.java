@@ -35,6 +35,7 @@ public class Console {
 	private static String request = "";
 	public static List<String> typed = new ArrayList<String>();
 	public static int typedInt;
+	private static boolean initialized;
 
 	public Console() {
 		Theme.init();
@@ -48,13 +49,11 @@ public class Console {
 				}
 			}
 		});
-
 		commands.add(new Command("stop") {
 			public void run(String args) {
 				ServerClass.stop();
 			}
 		});
-
 		commands.add(new Command("list") {
 			public void run(String args) {
 				for(int i = 0; i < ServerListener.list.size(); i++){
@@ -62,20 +61,22 @@ public class Console {
 				}
 			}
 		});
-
 		commands.add(new Command("restart") {
 			public void run(String args) {
 				ServerClass.stop();
 				new Thread(new ServerClass(),"ServerClass").start();
 			}
 		});
-
 		commands.add(new Command("savesettings") {
 			public void run(String args) {
 				Save.saveSettings();
 			}
 		});
-
+		commands.add(new Command("savethemes") {
+			public void run(String args) {
+				Theme.saveThemesAndColors();
+			}
+		});
 		commands.add(new Command("setname") {
 			public void run(String args) {
 				if(args == null || args.equals(""))
@@ -84,25 +85,21 @@ public class Console {
 				Console.println("set name to \"" + Save.name + "\"");
 			}
 		});
-
 		commands.add(new Command("getname") {
 			public void run(String args) {
 				Console.println("Name = " + Save.name);
 			}
 		});
-
 		commands.add(new Command("start") {
 			public void run(String args) {
 				new Thread(new ServerClass(),"ServerClass").start();
 			}
 		});
-
 		commands.add(new Command("clear") {
 			public void run(String args) {
 				textPane.setText("");
 			}
 		});
-
 		commands.add(new Command("createtheme") {
 			public void run(String args) {
 				String[] arguments = args.trim().split(" ");
@@ -145,22 +142,25 @@ public class Console {
 				Theme.createTheme(name, background, command, info, error);
 			}
 		});
-
 		commands.add(new Command("settheme") {
 			public void run(String args) {
 				Theme.setTheme(args);
 			}
 		});
-
 		commands.add(new Command("gettheme") {
 			public void run(String args) {
 				Console.println("Current theme: " + Theme.getCurrentThemeName());
 			}
 		});
+		commands.add(new Command("listcolors") {
+			public void run(String args) {
+				Theme.printColors();
+			}
+		});
 
 		frame = new JFrame("NC-ServerClass");
 		frame.setSize(800, 600);
-		frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEvent) {
 				println("Saving...");
@@ -202,11 +202,9 @@ public class Console {
 		frame.requestFocus();
 		textField.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {
-
 			}
 
 			public void keyPressed(KeyEvent e) {
-
 			}
 
 			public void keyReleased(KeyEvent e) {
@@ -228,6 +226,8 @@ public class Console {
 			}
 		});
 		textField.requestFocusInWindow();
+
+		initialized = true;
 	}
 
 	public static void println(String text) {
@@ -235,6 +235,8 @@ public class Console {
 	}
 
 	public static void println(String text, Color color) {
+		if(!initialized)
+			return;
 		StyleConstants.setForeground(style, color);
 		try {
 			document.insertString(document.getLength(), text + "\n", style);
@@ -255,11 +257,30 @@ public class Console {
     }
 
 	public static void doCommand(String commandString) {
-		String start = commandString.trim().split(" ")[0].toLowerCase();
+		String[] tokens = commandString.trim().split(" ");
+		String start = tokens[0].toLowerCase();
+		boolean startIncomplete = false;
+		if(start.equals("get") ||
+				start.equals("set") ||
+				start.equals("create") ||
+				start.equals("list") ||
+				start.equals("save")) {
+			startIncomplete = true;
+		}
+
+		if(startIncomplete && tokens.length >= 2) {
+			start += tokens[1];
+		}
+
+		String args = "";
+		for(int i = 1 + (startIncomplete ? 1 : 0); i < tokens.length; i++) {
+			args += tokens[i] + (i < tokens.length-1 ? " " : "");
+		}
+
 		boolean foundCommand = false;
 		for (Command command : commands) {
 			if (command.getName().equals(start)) {
-				command.run(commandString.substring(start.length()));
+				command.run(args);
 				foundCommand = true;
 				break;
 			}
