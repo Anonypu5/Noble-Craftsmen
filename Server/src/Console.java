@@ -144,44 +144,64 @@ public class Console {
 		});
 		commands.add(new Command("changetheme") {
 			public void run(String args) {
-				String[] arguments = args.trim().split(" ");
+				if(args == null) {
+					return;
+				}
+				String[] arguments = args.split(" ");
 				if (arguments.length < 3) {
 					Console.printErr("Too few arguments - follow the following template\n" +
-							" - change theme name setting color");
+							" - create theme name settingName newSetting");
 				} else if (arguments.length > 3) {
 					Console.printErr("Too many arguments - follow the following template\n" +
-							" - change theme name setting color");
+							" - create theme name settingName newSetting");
 				}
 
-				boolean foundError = false;
-
-				String name = arguments[0];
-
-				String background = arguments[1];
-				if (!Theme.doesColorExist(background)) {
-					Console.printErr("The color \"" + background + "\" does not exist");
-					foundError = true;
+				String curThemeName = Theme.getCurrentThemeName();
+				Theme curTheme = Theme.getTheme(curThemeName);
+				String colorName = arguments[2];
+				switch (arguments[1]) {
+					case "background":
+						if(!Theme.doesColorExist(colorName)) {
+							Console.printErr("Color \"" + colorName + "\" does not exist");
+							return;
+						}
+						curTheme.setBackground(Theme.getColor(colorName));
+						break;
+					case "info":
+						if(!Theme.doesColorExist(colorName)) {
+							Console.printErr("Color \"" + colorName + "\" does not exist");
+							return;
+						}
+						curTheme.setInfo(Theme.getColor(colorName));
+						break;
+					case "command":
+						if(!Theme.doesColorExist(colorName)) {
+							Console.printErr("Color \"" + colorName + "\" does not exist");
+							return;
+						}
+						curTheme.setCommand(Theme.getColor(colorName));
+						break;
+					case "error":
+						if(!Theme.doesColorExist(colorName)) {
+							Console.printErr("Color \"" + colorName + "\" does not exist");
+							return;
+						}
+						curTheme.setError(Theme.getColor(colorName));
+						break;
+					case "name":
+						Theme.deleteTheme(curThemeName);
+						curTheme.setName(arguments[1]);
+						Theme.addTheme(curTheme);
+						break;
+					default:
+						Console.printErr("Choose one of the following theme settings:\n" +
+								"    - background, changes the background color\n" +
+								"    - info, changes the information color\n" +
+								"    - info, changes the command color\n" +
+								"    - error, changes the error color\n" +
+								"    - name, changes the name of the theme\n");
+						break;
 				}
-				String command = arguments[2];
-				if (!Theme.doesColorExist(command)) {
-					Console.printErr("The color \"" + command + "\" does not exist");
-					foundError = true;
-				}
-				String info = arguments[3];
-				if (!Theme.doesColorExist(info)) {
-					Console.printErr("The color \"" + info + "\" does not exist");
-					foundError = true;
-				}
-				String error = arguments[4];
-				if (!Theme.doesColorExist(error)) {
-					Console.printErr("The color \"" + error + "\" does not exist");
-					foundError = true;
-				}
-
-				if (foundError)
-					return;
-
-				Theme.createTheme(name, background, command, info, error);
 			}
 		});
 		commands.add(new Command("settheme") {
@@ -197,6 +217,11 @@ public class Console {
 		commands.add(new Command("listcolors") {
 			public void run(String args) {
 				Theme.printColors();
+			}
+		});
+		commands.add(new Command("listcolors") {
+			public void run(String args) {
+				Theme.printThemes();
 			}
 		});
 

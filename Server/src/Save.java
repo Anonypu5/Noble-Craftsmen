@@ -21,19 +21,22 @@ public class Save {
 
 		if (os.startsWith("Windows")) {
 			osd = "\\";
-			folder = System.getProperty("user.home") + "\\AppData\\Roaming\\.NC-ServerClass";
+			folder = System.getProperty("user.home") + "\\AppData\\Roaming\\.NC-Server";
 		} else if (os.startsWith("Mac")) {
 			osd = "/";
-			folder = System.getProperty("user.home") + "/NC-ServerClass";
+			folder = System.getProperty("user.home") + "/NC-Server";
 		} else {
-			Console.println("NC-ServerClass Does not currently support this platform");
+			Console.println("NC-Server Does not currently support this platform");
+			Console.println("Write anything to exit...");
+			Console.requestNext();
+			System.exit(-75283676);
 		}
 
 		File dir = new File(folder);
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
-		dir = new File(dir.getPath() + osd + "Settings.ncs");
+		dir = new File(dir.getPath() + osd + "settings.ncs");
 		if (!dir.exists()) {
 			Console.println("Creating and saving settings...");
 			port = 1999;
@@ -64,20 +67,20 @@ public class Save {
 			SaveFile file = (SaveFile) o.readObject();
 			return file;
 		} catch (Exception e) {
-			Console.printErr(e.toString());
-			for (StackTraceElement x : e.getStackTrace()) {
-				Console.printErr("    " + x.toString());
-			}
-			e.printStackTrace();
-			Console.println("The process above failed, due to the error above \n Do you want to try again y/n?");
-			String awnser = Console.requestNext();
-			while (!awnser.equals("y") && !awnser.equals("n")) {
-				Console.println("Please write y or n");
-				awnser = Console.requestNext();
-			}
-			if (awnser.equals("y")) {
-				return openSaveFile(name);
-			}
+//			Console.printErr(e.toString());
+//			for (StackTraceElement x : e.getStackTrace()) {
+//				Console.printErr("    " + x.toString());
+//			}
+//			e.printStackTrace();
+//			Console.println("The process above failed, due to the error above \n Do you want to try again y/n?");
+//			String awnser = Console.requestNext();
+//			while (!awnser.equals("y") && !awnser.equals("n")) {
+//				Console.println("Please write y or n");
+//				awnser = Console.requestNext();
+//			}
+//			if (awnser.equals("y")) {
+//				return openSaveFile(name);
+//			}
 		}
 		return null;
 	}

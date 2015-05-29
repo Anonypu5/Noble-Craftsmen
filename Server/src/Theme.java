@@ -50,6 +50,12 @@ public class Theme implements Serializable {
 		}
 	}
 
+	public static void addTheme(Theme theme) {
+		if (!themes.containsKey(theme.name)) {
+			themes.put(theme.name, theme);
+		}
+	}
+
 	public static void setTheme(String name) {
 		Theme theme = getTheme(name);
 		if (theme != null) {
@@ -58,6 +64,13 @@ public class Theme implements Serializable {
 			Console.updateColors();
 		} else {
 			Console.printErr("The theme \"" + name + "\" doesn't exist");
+		}
+	}
+
+	public static void deleteTheme(String name) {
+		if (themes.containsKey(name)) {
+			themes.remove(name);
+			Console.println("Theme \"" + name + "\" has been deleted");
 		}
 	}
 
@@ -147,6 +160,7 @@ public class Theme implements Serializable {
 		if (saveFile == null) {
 			Console.println("Couldn't load settings for themes and colors");
 			Console.println("Set theme to \"default\"");
+			saveThemesAndColors();
 			return;
 		}
 		themes = (HashMap<String, Theme>) saveFile.obj[0][0];
@@ -181,6 +195,41 @@ public class Theme implements Serializable {
 
 	public static Color getBackgroundColor() {
 		return currentTheme.background.getColor();
+	}
+
+	public void setName(String name) {
+		if(name == null)
+			return;
+
+		this.name = name;
+	}
+
+	public void setBackground(ThemeColor background) {
+		if (background == null)
+			return;
+		
+		this.background = background;
+	}
+
+	public void setError(ThemeColor error) {
+		if (error == null)
+			return;
+
+		this.error = error;
+	}
+
+	public void setCommand(ThemeColor command) {
+		if (command == null)
+			return;
+
+		this.command = command;
+	}
+
+	public void setInfo(ThemeColor info) {
+		if (info == null)
+			return;
+
+		this.info = info;
 	}
 
 }
