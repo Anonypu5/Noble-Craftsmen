@@ -56,7 +56,7 @@ public class Console {
 		});
 		commands.add(new Command("list") {
 			public void run(String args) {
-				for(int i = 0; i < ServerListener.list.size(); i++){
+				for (int i = 0; i < ServerListener.list.size(); i++) {
 					println(i + "    " + ServerListener.list.get(i).conn.getIP() + "    " + (ServerListener.list.get(i).loggedIn ? ServerListener.list.get(i).name : "not logged in"));
 				}
 			}
@@ -64,7 +64,7 @@ public class Console {
 		commands.add(new Command("restart") {
 			public void run(String args) {
 				ServerClass.stop();
-				new Thread(new ServerClass(),"ServerClass").start();
+				new Thread(new ServerClass(), "ServerClass").start();
 			}
 		});
 		commands.add(new Command("savesettings") {
@@ -79,9 +79,9 @@ public class Console {
 		});
 		commands.add(new Command("setname") {
 			public void run(String args) {
-				if(args == null || args.equals(""))
+				if (args == null || args.equals(""))
 					return;
-				Save.name = args.trim().split(" ")[0];
+				Save.name = args.trim();
 				Console.println("set name to \"" + Save.name + "\"");
 			}
 		});
@@ -92,7 +92,7 @@ public class Console {
 		});
 		commands.add(new Command("start") {
 			public void run(String args) {
-				new Thread(new ServerClass(),"ServerClass").start();
+				new Thread(new ServerClass(), "ServerClass").start();
 			}
 		});
 		commands.add(new Command("clear") {
@@ -103,12 +103,12 @@ public class Console {
 		commands.add(new Command("createtheme") {
 			public void run(String args) {
 				String[] arguments = args.trim().split(" ");
-				if(arguments.length < 5) {
+				if (arguments.length < 5) {
 					Console.printErr("Too few arguments - follow the following template\n" +
-							" - createtheme name backgroundCol commandCol infoCol errorCol");
-				} else if(arguments.length > 5) {
+							" - create theme name backgroundCol commandCol infoCol errorCol");
+				} else if (arguments.length > 5) {
 					Console.printErr("Too many arguments - follow the following template\n" +
-							" - createtheme name backgroundCol commandCol infoCol errorCol");
+							" - create theme name backgroundCol commandCol infoCol errorCol");
 				}
 
 				boolean foundError = false;
@@ -116,27 +116,69 @@ public class Console {
 				String name = arguments[0];
 
 				String background = arguments[1];
-				if(!Theme.doesColorExist(background)){
+				if (!Theme.doesColorExist(background)) {
 					Console.printErr("The color \"" + background + "\" does not exist");
 					foundError = true;
 				}
 				String command = arguments[2];
-				if(!Theme.doesColorExist(command)){
+				if (!Theme.doesColorExist(command)) {
 					Console.printErr("The color \"" + command + "\" does not exist");
 					foundError = true;
 				}
 				String info = arguments[3];
-				if(!Theme.doesColorExist(info)){
+				if (!Theme.doesColorExist(info)) {
 					Console.printErr("The color \"" + info + "\" does not exist");
 					foundError = true;
 				}
 				String error = arguments[4];
-				if(!Theme.doesColorExist(error)){
+				if (!Theme.doesColorExist(error)) {
 					Console.printErr("The color \"" + error + "\" does not exist");
 					foundError = true;
 				}
 
-				if(foundError)
+				if (foundError)
+					return;
+
+				Theme.createTheme(name, background, command, info, error);
+			}
+		});
+		commands.add(new Command("changetheme") {
+			public void run(String args) {
+				String[] arguments = args.trim().split(" ");
+				if (arguments.length < 3) {
+					Console.printErr("Too few arguments - follow the following template\n" +
+							" - change theme name setting color");
+				} else if (arguments.length > 3) {
+					Console.printErr("Too many arguments - follow the following template\n" +
+							" - change theme name setting color");
+				}
+
+				boolean foundError = false;
+
+				String name = arguments[0];
+
+				String background = arguments[1];
+				if (!Theme.doesColorExist(background)) {
+					Console.printErr("The color \"" + background + "\" does not exist");
+					foundError = true;
+				}
+				String command = arguments[2];
+				if (!Theme.doesColorExist(command)) {
+					Console.printErr("The color \"" + command + "\" does not exist");
+					foundError = true;
+				}
+				String info = arguments[3];
+				if (!Theme.doesColorExist(info)) {
+					Console.printErr("The color \"" + info + "\" does not exist");
+					foundError = true;
+				}
+				String error = arguments[4];
+				if (!Theme.doesColorExist(error)) {
+					Console.printErr("The color \"" + error + "\" does not exist");
+					foundError = true;
+				}
+
+				if (foundError)
 					return;
 
 				Theme.createTheme(name, background, command, info, error);
@@ -192,7 +234,7 @@ public class Console {
 				typedInt = 0;
 			}
 		});
-		textField.setBackground(new Color(40, 40, 40));
+		textField.setBackground(Theme.getBackgroundColor());
 		textField.setCaretColor(Theme.getInfoColor());
 		textField.setForeground(Theme.getCommandColor());
 		frame.add(textField, BorderLayout.SOUTH);
@@ -213,11 +255,11 @@ public class Console {
 						Console.typedInt++;
 					}
 					Console.textField.setText(Console.typed.get(Console.typed.size() - Console.typedInt));
-				} else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					if (Console.typedInt > 0) {
 						Console.typedInt--;
 					}
-					if(Console.typedInt > 0){
+					if (Console.typedInt > 0) {
 						Console.textField.setText(Console.typed.get(Console.typed.size() - Console.typedInt));
 					} else {
 						Console.textField.setText("");
@@ -235,7 +277,7 @@ public class Console {
 	}
 
 	public static void println(String text, Color color) {
-		if(!initialized)
+		if (!initialized)
 			return;
 		StyleConstants.setForeground(style, color);
 		try {
@@ -249,32 +291,33 @@ public class Console {
 		println(text, Theme.getErrorColor());
 	}
 
-    public static void exit(){
-        println("Saving...");
-        println("See you soon, captain :)");
-        println("PS: We fucked your mum");
+	public static void exit() {
+		println("Saving...");
+		println("See you soon, captain :)");
+		println("PS: We fucked your mum");
 		System.exit(0);
-    }
+	}
 
 	public static void doCommand(String commandString) {
-		String[] tokens = commandString.trim().split(" ");
+		String[] tokens = splitString(commandString, " ");
 		String start = tokens[0].toLowerCase();
 		boolean startIncomplete = false;
-		if(start.equals("get") ||
+		if (start.equals("get") ||
 				start.equals("set") ||
 				start.equals("create") ||
 				start.equals("list") ||
-				start.equals("save")) {
+				start.equals("save") ||
+				start.equals("change")) {
 			startIncomplete = true;
 		}
 
-		if(startIncomplete && tokens.length >= 2) {
+		if (startIncomplete && tokens.length >= 2) {
 			start += tokens[1];
 		}
 
 		String args = "";
-		for(int i = 1 + (startIncomplete ? 1 : 0); i < tokens.length; i++) {
-			args += tokens[i] + (i < tokens.length-1 ? " " : "");
+		for (int i = 1 + (startIncomplete ? 1 : 0); i < tokens.length; i++) {
+			args += tokens[i] + (i < tokens.length - 1 ? " " : "");
 		}
 
 		boolean foundCommand = false;
@@ -285,8 +328,26 @@ public class Console {
 				break;
 			}
 		}
-		if(!foundCommand)
+		if (!foundCommand)
 			printErr("No such command: \"" + start + "\"");
+	}
+
+	private static String[] splitString(String source, String regex) {
+		String[] startArray = source.split(regex);
+		List<String> stringList = new ArrayList<>();
+
+		for (int i = 0; i < startArray.length; i++) {
+			if (!(startArray[i].equals(""))) {
+				stringList.add(startArray[i]);
+			}
+		}
+
+		String[] resultArray = new String[stringList.size()];
+		int index = 0;
+		for (String s : stringList) {
+			resultArray[index++] = s;
+		}
+		return resultArray;
 	}
 
 	public static String requestNext() {
@@ -306,12 +367,22 @@ public class Console {
 		return request;
 	}
 
-	public static void printStackTrace(Exception e){
+	public static void printStackTrace(Exception e) {
 		Console.printErr(e.toString());
-		for (StackTraceElement x: e.getStackTrace()){
-			Console.printErr("    "+x.toString());
+		for (StackTraceElement x : e.getStackTrace()) {
+			Console.printErr("    " + x.toString());
 		}
 		e.printStackTrace();
+	}
+
+	public static void updateColors() {
+		if (textPane == null || textField == null) {
+			return;
+		}
+		textPane.setBackground(Theme.getBackgroundColor());
+		textField.setBackground(Theme.getBackgroundColor());
+		textField.setCaretColor(Theme.getInfoColor());
+		textField.setForeground(Theme.getCommandColor());
 	}
 }
 

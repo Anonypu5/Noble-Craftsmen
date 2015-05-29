@@ -46,7 +46,7 @@ public class Save {
 	private void loadSettings() {
 		SaveFile file = openSaveFile("settings.ncs");
 
-		if(file == null)
+		if (file == null)
 			return;
 
 		port = (int) file.obj[0][1];
@@ -55,13 +55,14 @@ public class Save {
 
 	public static SaveFile openSaveFile(String name) {
 		try {
-			FileInputStream i = new FileInputStream(folder + osd + "Settings.ncs");
-			long length = new File(folder + osd + "Settings.ncs").length();
+			FileInputStream i = new FileInputStream(folder + osd + name);
+			long length = new File(folder + osd + name).length();
 			byte[] bytes = new byte[(int) length];
 			i.read(bytes);
 			ByteArrayInputStream b = new ByteArrayInputStream(bytes);
 			ObjectInputStream o = new ObjectInputStream(b);
 			SaveFile file = (SaveFile) o.readObject();
+			return file;
 		} catch (Exception e) {
 			Console.printErr(e.toString());
 			for (StackTraceElement x : e.getStackTrace()) {
@@ -76,8 +77,6 @@ public class Save {
 			}
 			if (awnser.equals("y")) {
 				return openSaveFile(name);
-			} else {
-				Console.exit();
 			}
 		}
 		return null;

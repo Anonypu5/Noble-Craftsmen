@@ -39,10 +39,6 @@ public class Theme implements Serializable {
 		Theme defaultTheme = new Theme("default", ThemeColor.BLACK, ThemeColor.PINK, ThemeColor.GREEN, ThemeColor.RED);
 		defaultThemes.put("default", defaultTheme);
 		setTheme("default");
-
-		SaveFile saveFile = Save.openSaveFile("themes.ncs");
-		themes = (HashMap<String, Theme>) saveFile.obj[0][0];
-		colors = (HashMap<String, ThemeColor>) saveFile.obj[0][1];
 	}
 
 	public static void createTheme(String name, String background, String command, String info, String error) {
@@ -58,7 +54,8 @@ public class Theme implements Serializable {
 		Theme theme = getTheme(name);
 		if (theme != null) {
 			currentTheme = theme;
-			Console.println("Theme set to: " + currentTheme);
+			Console.println("Theme set to: " + name);
+			Console.updateColors();
 		} else {
 			Console.printErr("The theme \"" + name + "\" doesn't exist");
 		}
@@ -136,12 +133,26 @@ public class Theme implements Serializable {
 
 	public static void saveThemesAndColors() {
 		SaveFile saveFile = new SaveFile();
-		saveFile.obj = new Object[1][2];
+		saveFile.obj = new Object[1][3];
 		saveFile.obj[0][0] = themes;
 		saveFile.obj[0][1] = colors;
+		saveFile.obj[0][2] = currentTheme.name;
 		Save.saveFile(saveFile, "themes.ncs");
 
 		Console.println("Saved themes and colors");
+	}
+
+	public static void loadThemesAndColors() {
+		SaveFile saveFile = Save.openSaveFile("themes.ncs");
+		if (saveFile == null) {
+			Console.println("Couldn't load settings for themes and colors");
+			Console.println("Set theme to \"default\"");
+			return;
+		}
+		themes = (HashMap<String, Theme>) saveFile.obj[0][0];
+		colors = (HashMap<String, ThemeColor>) saveFile.obj[0][1];
+		String curThemeName = (String) saveFile.obj[0][2];
+		setTheme(curThemeName);
 	}
 
 	private Theme(String name, ThemeColor background, ThemeColor command, ThemeColor info, ThemeColor error) {
@@ -174,7 +185,7 @@ public class Theme implements Serializable {
 
 }
 
-class ThemeColor {
+class ThemeColor implements Serializable {
 	public static final ThemeColor GRAY = new ThemeColor("gray", Color.GRAY);
 	public static final ThemeColor LIGHT_GRAY = new ThemeColor("light_gray", Color.LIGHT_GRAY);
 	public static final ThemeColor DARK_GRAY = new ThemeColor("dark_gray", Color.DARK_GRAY);

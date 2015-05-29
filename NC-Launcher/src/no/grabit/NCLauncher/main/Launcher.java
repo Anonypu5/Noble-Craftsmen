@@ -3,6 +3,7 @@ package no.grabit.NCLauncher.main;
 import no.grabit.NCLauncher.graphics.Label;
 import no.grabit.NCLauncher.graphics.Shader;
 import no.grabit.NCLauncher.scenegraph.GameObject;
+import no.grabit.NCLauncher.util.Time;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.*;
@@ -21,6 +22,7 @@ public class Launcher implements Runnable {
 	public static final String TITLE = "Noble Craftsmen";
 
 	private GameObject root;
+	private Label label;
 
 	public void run() {
 		init();
@@ -30,8 +32,8 @@ public class Launcher implements Runnable {
 
 		while(!Display.isCloseRequested()) {
 			long now = System.nanoTime();
+			Time.setDeltaTime(now, lastTime);
 			lastTime = now;
-			//TODO: add Time class
 
 			update();
 			render();
@@ -43,6 +45,7 @@ public class Launcher implements Runnable {
 	}
 
 	private void update() {
+
 	}
 
 	private void render() {

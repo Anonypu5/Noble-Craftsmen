@@ -75,6 +75,8 @@ public class Label extends GameComponent {
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glLoadIdentity();
 		GL11.glScalef(getTransform().getScale().getX(), getTransform().getScale().getY(), 1f);
+		GL11.glTranslatef(-font.getWidth(text) / 2, -font.getLineHeight() / 2, 0);
+		GL11.glTranslatef(getTransform().getPosition().getX() * 600f * 5f / 3f, -600 * 5 / 3 * getTransform().getPosition().getY(), 0);
 		font.drawString(0, 0, text, org.newdawn.slick.Color.yellow);
 		GL11.glLoadIdentity();
 		curShader.bind();
