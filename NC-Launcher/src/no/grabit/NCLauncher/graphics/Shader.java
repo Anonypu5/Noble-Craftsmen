@@ -19,6 +19,7 @@ public class Shader {
 	private static Shader curShader = null;
 
 	public static final Shader basicShader = new Shader("basic");
+	public static final Shader coloredQuadrilateralShader = new Shader("coloredQuadrilateral");
 
 	private int program;
 
@@ -56,8 +57,13 @@ public class Shader {
 			return;
 		}
 
-		GL20.glBindAttribLocation(program, 0, "attr_Position");
-		GL20.glBindAttribLocation(program, 1, "attr_TexCoord");
+		if(shaderName.equals("basic")) {
+			GL20.glBindAttribLocation(program, 0, "attr_Position");
+			GL20.glBindAttribLocation(program, 1, "attr_TexCoord");
+		} else if(shaderName.equals("coloredQuadrilateral")) {
+			GL20.glBindAttribLocation(program, 0, "attr_Position");
+			GL20.glBindAttribLocation(program, 1, "attr_Color");
+		}
 
 		this.program = tempProgram;
 	}
