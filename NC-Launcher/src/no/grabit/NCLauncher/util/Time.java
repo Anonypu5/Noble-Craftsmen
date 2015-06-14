@@ -10,6 +10,10 @@ public final class Time {
 
 	private Time() {}
 
+	public static void addTime(float delta) {
+		Time.time += delta * 1_000_000_000L;
+	}
+
 	public static void setTime(long time) {
 		Time.time = time;
 	}

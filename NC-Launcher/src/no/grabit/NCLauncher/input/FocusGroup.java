@@ -22,7 +22,7 @@ public class FocusGroup {
 		}
 	}
 
-	public void updateFocus(Focusable source) {
+	public void updateFocus(Focusable source, long time) {
 		System.out.println(source == null);
 		if(source != null && !focusables.contains(source))
 			return;

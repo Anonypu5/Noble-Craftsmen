@@ -42,8 +42,8 @@ public class Label extends GameObject {
 
 	protected String text;
 	private float size;
-	private Font actualFont;
-	private UnicodeFont font;
+	protected Font actualFont;
+	protected UnicodeFont font;
 	protected int positioning = POSITION_CENTERED;
 
 	public Label(String tag, Font font, String text, float size, int positioningMode) {
@@ -67,12 +67,15 @@ public class Label extends GameObject {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+		System.out.println("yeah?");
 		switch (positioning) {
 			case POSITION_CENTERED:
-				getTransform().getPosition().set(getTransform().getPosition().getX() - font.getWidth(text) / 2, getTransform().getPosition().getY() - font.getWidth(text));
+				getTransform().getPosition().set(getTransform().getPosition().getX() - font.getWidth(text) / 2, getTransform().getPosition().getY() - font.getLineHeight());
 				break;
 			case POSITION_CENTERED_MIDDLE_LEFT_TO_RIGHT:
-				Vector3f.sub(getTransform().getPosition(), new Vector3f(0, -font.getLineHeight() / 2, 0), getTransform().getPosition());
+				System.out.println("yeah.");
+				//getTransform().getPosition().set(getTransform().getPosition().getX(), getTransform().getPosition().getY() - font.getLineHeight() + 100f);
+				getTransform().getPosition().set(0f, 0f, 0f);
 				break;
 			default:
 				break;
@@ -98,10 +101,11 @@ public class Label extends GameObject {
 		Shader curShader = Shader.getCurShader();
 		Shader.unbind();
 
-
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glLoadIdentity();
 		Matrix4f mat4 = getModelView();
+//		System.out.println("label: " + getTag() + "\n" + mat4.toString());
+		System.out.println("\n" + getTag() + "(" + getTransform().getPosition().getX() + ", " + getTransform().getPosition().getY() + ")");
 		FloatBuffer floatBuffer = BufferUtils.createFloatBuffer(16);
 		mat4.store(floatBuffer);
 		floatBuffer.flip();

@@ -33,7 +33,7 @@ public class Launcher implements Runnable {
 		while(!Display.isCloseRequested()) {
 			long now = System.nanoTime();
 			Time.setDeltaTime(now, lastTime);
-			Time.setTime(now);
+			Time.addTime(Time.deltaTime());
 			lastTime = now;
 
 			update();
@@ -96,7 +96,7 @@ public class Launcher implements Runnable {
 //		label3.getTransform().getPosition().set(-0.75f, -0.25f);
 //		root.add(label3);
 
-		InputLabel username = new InputLabel("username", Label.medievalFont, "username: ", 200, Label.POSITION_CENTERED_MIDDLE_LEFT_TO_RIGHT, new Vector2f(1f, 0.2f), true);
+		InputLabel username = new InputLabel("username", Label.medievalFont, "username: ", 200, Label.POSITION_CENTERED_MIDDLE_LEFT_TO_RIGHT, new Vector2f(1f, 0.2f));
 		username.getTransform().getPosition().set(-0.75f, 0.2f);
 		root.add(username);
 

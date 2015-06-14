@@ -4,6 +4,7 @@ import no.grabit.NCLauncher.main.Launcher;
 import no.grabit.NCLauncher.util.Time;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
@@ -92,21 +93,21 @@ public class InputLabel extends Label implements Focusable {
 			Point point = new Point(Launcher.getMouseX(), Launcher.getMouseY());
 			Rectangle rectangle = null;
 			if (positioning == POSITION_CENTERED) {
-				rectangle = new Rectangle(getTransform().getPosition().getX() - bounds.getX() / 2, getTransform().getPosition().getY() - bounds.getY() / 2, bounds.getX(), bounds.getY());
+				rectangle = new Rectangle(getTransform().getPosition().getX(), getTransform().getPosition().getY() + (float) font.getHeight(text) / Display.getHeight() / 2, bounds.getX(), bounds.getY());
 			} else if (positioning == POSITION_CENTERED_MIDDLE_LEFT_TO_RIGHT) {
-				rectangle = new Rectangle(getTransform().getPosition().getX(), getTransform().getPosition().getY() - bounds.getY() / 2, bounds.getX(), bounds.getY());
+				rectangle = new Rectangle(getTransform().getPosition().getX(), getTransform().getPosition().getY() + (float) font.getHeight(text) / Display.getHeight() / 2, bounds.getX(), bounds.getY());
 			}
 
 			if (rectangle != null) {
 				if (rectangle.contains(point)) {
 					if (group != null) {
-						group.updateFocus(this);
+						group.updateFocus(this, Time.getTime());
 					} else {
 						hasFocus = true;
 					}
 				} else {
 					if (group != null) {
-						group.updateFocus(null);
+						group.updateFocus(null, Time.getTime());
 					} else {
 						hasFocus = false;
 					}
@@ -144,8 +145,14 @@ public class InputLabel extends Label implements Focusable {
 		}
 	}
 
+	boolean f = true;
+
 	@Override
 	public void renderObject() {
+		if(f) {
+f = !f;
+			getTransform().getPosition().set(getTransform().getPosition().getX(), getTransform().getPosition().getY());
+		}
 
 		if (showInputText)
 			text = actualText + inputString;
