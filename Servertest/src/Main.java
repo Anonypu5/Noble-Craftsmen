@@ -54,7 +54,7 @@ public class Main {
 
 			}
 //		}, "92.220.161.232", 1999, true);
-		}, "10.20.5.96", 1999, true);
+		}, "localhost", 1999, true);
 		try {
 			conn.connect();
 			Main.conn = conn;
