@@ -50,12 +50,27 @@ public class Theme implements Serializable {
 		}
 	}
 
+	public static void addTheme(Theme theme) {
+		if (!themes.containsKey(theme.name)) {
+			themes.put(theme.name, theme);
+		}
+	}
+
 	public static void setTheme(String name) {
-				Theme theme = getTheme(name);
-				if(theme != null) {
-					currentTheme = theme;
+		Theme theme = getTheme(name);
+		if (theme != null) {
+			currentTheme = theme;
+			Console.println("Theme set to: " + name);
+			Console.updateColors();
 		} else {
 			Console.printErr("The theme \"" + name + "\" doesn't exist");
+		}
+	}
+
+	public static void deleteTheme(String name) {
+		if (themes.containsKey(name)) {
+			themes.remove(name);
+			Console.println("Theme \"" + name + "\" has been deleted");
 		}
 	}
 
@@ -86,9 +101,9 @@ public class Theme implements Serializable {
 	}
 
 	public static ThemeColor getColor(String name) {
-		if(defaultColors.containsKey(name)) {
+		if (defaultColors.containsKey(name)) {
 			return defaultColors.get(name);
-		} else if(colors.containsKey(name)) {
+		} else if (colors.containsKey(name)) {
 			return colors.get(name);
 		}
 		System.out.println("plis");
@@ -103,15 +118,55 @@ public class Theme implements Serializable {
 		return defaultThemes.containsKey(name) || themes.containsKey(name);
 	}
 
-	public static void displayColors() {
-		Console.println("current existing colors");
-		for(ThemeColor color : defaultColors.values()) {
+	public static void printColors() {
+		Console.println("current existing colors:");
+		int index = 0;
+		for (ThemeColor color : defaultColors.values()) {
+			index++;
+			Console.println("    -" + index + "  -  " + color.getName() + "(" + color.getColor().getRed() + ", " + color.getColor().getGreen() + ", " + color.getColor().getBlue() + ")");
+		}
+		for (ThemeColor color : colors.values()) {
+			index++;
+			Console.println("    -" + index + "  -  " + color.getName() + "(" + color.getColor().getRed() + ", " + color.getColor().getGreen() + ", " + color.getColor().getBlue() + ")");
+		}
+	}
 
+	public static void printThemes() {
+		Console.println("current existing themes:");
+		int index = 0;
+		for (Theme theme : defaultThemes.values()) {
+			index++;
+			Console.println("    -" + index + "  -  " + theme.name + "(" + theme.background + ", " + theme.command + ", " + theme.info + ", " + theme.error + ")");
+		}
+		for (Theme theme : themes.values()) {
+			index++;
+			Console.println("    -" + index + "  -  " + theme.name + "(" + theme.background + ", " + theme.command + ", " + theme.info + ", " + theme.error + ")");
 		}
 	}
 
 	public static void saveThemesAndColors() {
+		SaveFile saveFile = new SaveFile();
+		saveFile.obj = new Object[1][3];
+		saveFile.obj[0][0] = themes;
+		saveFile.obj[0][1] = colors;
+		saveFile.obj[0][2] = currentTheme.name;
+		Save.saveFile(saveFile, "themes.ncs");
 
+		Console.println("Saved themes and colors");
+	}
+
+	public static void loadThemesAndColors() {
+		SaveFile saveFile = Save.openSaveFile("themes.ncs");
+		if (saveFile == null) {
+			Console.println("Couldn't load settings for themes and colors");
+			Console.println("Set theme to \"default\"");
+			saveThemesAndColors();
+			return;
+		}
+		themes = (HashMap<String, Theme>) saveFile.obj[0][0];
+		colors = (HashMap<String, ThemeColor>) saveFile.obj[0][1];
+		String curThemeName = (String) saveFile.obj[0][2];
+		setTheme(curThemeName);
 	}
 
 	private Theme(String name, ThemeColor background, ThemeColor command, ThemeColor info, ThemeColor error) {
@@ -142,9 +197,44 @@ public class Theme implements Serializable {
 		return currentTheme.background.getColor();
 	}
 
+	public void setName(String name) {
+		if(name == null)
+			return;
+
+		this.name = name;
+	}
+
+	public void setBackground(ThemeColor background) {
+		if (background == null)
+			return;
+		
+		this.background = background;
+	}
+
+	public void setError(ThemeColor error) {
+		if (error == null)
+			return;
+
+		this.error = error;
+	}
+
+	public void setCommand(ThemeColor command) {
+		if (command == null)
+			return;
+
+		this.command = command;
+	}
+
+	public void setInfo(ThemeColor info) {
+		if (info == null)
+			return;
+
+		this.info = info;
+	}
+
 }
 
-class ThemeColor {
+class ThemeColor implements Serializable {
 	public static final ThemeColor GRAY = new ThemeColor("gray", Color.GRAY);
 	public static final ThemeColor LIGHT_GRAY = new ThemeColor("light_gray", Color.LIGHT_GRAY);
 	public static final ThemeColor DARK_GRAY = new ThemeColor("dark_gray", Color.DARK_GRAY);
