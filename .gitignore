@@ -13,8 +13,6 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-*.xml
-
 
 # Windows shortcuts
 *.lnk
@@ -45,10 +43,8 @@ Temporary Items
 .apdisk
 NC-Game/.idea/workspace.xml
 *.class
-NC-Game/.idea/dictionaries/Ole.xml
 Server/.idea/workspace.xml
-NC-Game/.idea/codeStyleSettings.xml
-NC-Launcher/.idea/workspace.xml
+NC-Launcher\.idea\workspace.xml
 NC-Launcher/.idea/workspace.xml
 Servertest/.idea/workspace.xml
 Servertest/.idea/workspace.xml
