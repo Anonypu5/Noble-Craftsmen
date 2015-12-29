@@ -6,6 +6,7 @@ import no.grabit.NobleCraftsmen.graphics.Sprite;
 import no.grabit.NobleCraftsmen.scenegraph.GameComponent;
 import no.grabit.NobleCraftsmen.scenegraph.GameObject;
 import no.grabit.NobleCraftsmen.util.Time;
+import no.grabit.NobleCraftsmen.world.World;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.*;
@@ -50,7 +51,6 @@ public class Game implements Runnable {
 
 	private void update() {
 		root.update();
-		root.getTransform().getPosition().set(getMouseX(), getMouseY());
 	}
 
 	private void render() {
@@ -107,31 +107,7 @@ public class Game implements Runnable {
 		Label.init();
 
 		root = new GameObject("Root");
-		root.getTransform().setRotation(45f);
-		sprite = new Sprite("test sprite", "/textures/Commando.png");
-		root.add(sprite);
-		Label label = new Label("testlabel", Label.medievalFont, "testtest", 200);
-		label.getTransform().getScale().set(0.001f, -0.001f);
-		label.getTransform().getPosition().set(0f, 0f);
-		root.add(label);
-
-		GameObject object1 = new GameObject("one");
-		GameObject object2 = new GameObject("two");
-		GameObject object3 = new GameObject("three");
-
-		object1.getTransform().getPosition().set(0.5f, 0f);
-		object1.getTransform().setRotation(45f);
-		root.add(object1);
-		object2.getTransform().getPosition().set(0.5f, 0f);
-		object2.getTransform().setRotation(45f);
-		object1.add(object2);
-		object3.getTransform().getPosition().set(0.5f, 0f);
-		object3.getTransform().setRotation(45f);
-		object2.add(object3);
-
-		sprite.getTransform().getPosition().set(0.5f, 0f);
-		sprite.getTransform().setRotation(45f);
-		object3.add(sprite);
+		root.add(new World("test world"));
 	}
 
 	private static void initGL() {

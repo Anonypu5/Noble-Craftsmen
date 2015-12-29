@@ -67,6 +67,11 @@ public class Sprite extends GameComponent {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
+	public Sprite(String tag, Texture texture) {
+		super("sprite." + tag);
+		this.texture = texture;
+	}
+
 	public void update() {
 		// don't need this
 	}

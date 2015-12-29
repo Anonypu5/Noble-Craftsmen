@@ -16,7 +16,7 @@ public class FocusGroup {
 	}
 
 	public void remove(Focusable focusable) {
-		if(focusables.contains(focusable)) {
+		if (focusables.contains(focusable)) {
 			focusables.remove(focusable);
 			focusable.setFocusGroup(null);
 		}
@@ -24,11 +24,11 @@ public class FocusGroup {
 
 	public void updateFocus(Focusable source, long time) {
 		System.out.println(source == null);
-		if(source != null && !focusables.contains(source))
+		if (source != null && !focusables.contains(source))
 			return;
 
-		for(Focusable focusable : focusables) {
-			if(focusable == source)
+		for (Focusable focusable : focusables) {
+			if (focusable == source)
 				focusable.onGetFocus();
 			else
 				focusable.onLoseFocus();

@@ -8,14 +8,11 @@ public final class Time {
 	private static float delta;
 	private static long time;
 
-	private Time() {}
+	private Time() {
+	}
 
 	public static void addTime(float delta) {
 		Time.time += delta * 1_000_000_000L;
-	}
-
-	public static void setTime(long time) {
-		Time.time = time;
 	}
 
 	public static void setDeltaTime(long now, long lastTime) {
@@ -28,6 +25,10 @@ public final class Time {
 
 	public static long getTime() {
 		return time;
+	}
+
+	public static void setTime(long time) {
+		Time.time = time;
 	}
 
 	public static long getSecond() {

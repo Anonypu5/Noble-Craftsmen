@@ -1,9 +1,9 @@
 package no.grabit.NCLauncher.graphics;
 
 import no.grabit.NCLauncher.util.FileUtils;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBVertexShader;
-import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.util.vector.Matrix4f;
 
@@ -16,11 +16,9 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
  * Created by Ole on 24/05/2015.
  */
 public class Shader {
-	private static Shader curShader = null;
-
 	public static final Shader basicShader = new Shader("basic");
 	public static final Shader coloredQuadrilateralShader = new Shader("coloredQuadrilateral");
-
+	private static Shader curShader = null;
 	private int program;
 
 	private Shader(String shaderName) {
@@ -57,20 +55,15 @@ public class Shader {
 			return;
 		}
 
-		if(shaderName.equals("basic")) {
+		if (shaderName.equals("basic")) {
 			GL20.glBindAttribLocation(program, 0, "attr_Position");
 			GL20.glBindAttribLocation(program, 1, "attr_TexCoord");
-		} else if(shaderName.equals("coloredQuadrilateral")) {
+		} else if (shaderName.equals("coloredQuadrilateral")) {
 			GL20.glBindAttribLocation(program, 0, "attr_Position");
 			GL20.glBindAttribLocation(program, 1, "attr_Color");
 		}
 
 		this.program = tempProgram;
-	}
-
-	public void bind() {
-		glUseProgramObjectARB(program);
-		curShader = this;
 	}
 
 	public static void unbind() {
@@ -79,7 +72,7 @@ public class Shader {
 	}
 
 	public static void setUnfiformMat4f(Matrix4f mat4, String name) {
-		if(curShader == null)
+		if (curShader == null)
 			return;
 		FloatBuffer floatBuffer = BufferUtils.createFloatBuffer(16);
 		mat4.store(floatBuffer);
@@ -89,6 +82,15 @@ public class Shader {
 
 	public static Shader getCurShader() {
 		return curShader;
+	}
+
+	private static String getLogInfo(int obj) {
+		return glGetInfoLogARB(obj, glGetObjectParameteriARB(obj, GL_OBJECT_INFO_LOG_LENGTH_ARB));
+	}
+
+	public void bind() {
+		glUseProgramObjectARB(program);
+		curShader = this;
 	}
 
 	private int createShader(String shaderName, int shaderType) throws Exception {
@@ -110,10 +112,6 @@ public class Shader {
 			glDeleteObjectARB(shader);
 			throw exc;
 		}
-	}
-
-	private static String getLogInfo(int obj) {
-		return glGetInfoLogARB(obj, glGetObjectParameteriARB(obj, GL_OBJECT_INFO_LOG_LENGTH_ARB));
 	}
 
 }

@@ -15,10 +15,10 @@ import org.newdawn.slick.geom.Rectangle;
 public class Button extends GameObject {
 
 	protected boolean hoveringOver;
-	private boolean pressed;
-	private boolean justPressed;
 	protected Vector2f bounds;
 	protected Label label;
+	private boolean pressed;
+	private boolean justPressed;
 
 	public Button(String tag, Vector2f bounds, Vector4f color, Label label) {
 		super("button." + tag);
@@ -35,10 +35,10 @@ public class Button extends GameObject {
 		Point mouse = new Point(Launcher.getMouseX(), Launcher.getMouseY());
 		Rectangle button = new Rectangle(getTransform().getPosition().getX() - bounds.getX() / 2, getTransform().getPosition().getY() - bounds.getY() / 2, bounds.getX(), bounds.getY());
 
-		if(button.contains(mouse)) {
+		if (button.contains(mouse)) {
 			hoveringOver = true;
-			if(Mouse.isButtonDown(0)) {
-				if(!pressed) {
+			if (Mouse.isButtonDown(0)) {
+				if (!pressed) {
 					justPressed = true;
 				} else {
 					justPressed = false;
@@ -51,7 +51,7 @@ public class Button extends GameObject {
 			hoveringOver = pressed = justPressed = false;
 		}
 
-		if(justPressed) {
+		if (justPressed) {
 			System.out.println("logged in");
 		}
 	}

@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL12.*;
+import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 
 /**
  * Created by Ole on 25/05/2015.
@@ -20,7 +20,7 @@ public class Texture {
 
 	public Texture(String fileName) {
 		BufferedImage image = FileUtils.loadImageFile(fileName);
-		if(image == null) {
+		if (image == null) {
 			textureID = -1;
 			return;
 		}
@@ -28,8 +28,8 @@ public class Texture {
 
 		ByteBuffer buffer = BufferUtils.createByteBuffer(image.getWidth() * image.getHeight() * BYTES_PER_PIXEL); //4 for RGBA, 3 for RGB
 
-		for(int y = 0; y < image.getHeight(); y++){
-			for(int x = 0; x < image.getWidth(); x++){
+		for (int y = 0; y < image.getHeight(); y++) {
+			for (int x = 0; x < image.getWidth(); x++) {
 				int pixel = pixels[y * image.getWidth() + x];
 				buffer.put((byte) ((pixel >> 16) & 0xFF));     // Red component
 				buffer.put((byte) ((pixel >> 8) & 0xFF));      // Green component
@@ -58,14 +58,14 @@ public class Texture {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	public void bind() {
-		if(textureID > 0) {
-			glBindTexture(GL_TEXTURE_2D, textureID);
-		}
-	}
-
 	public static void unbind() {
 		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	public void bind() {
+		if (textureID > 0) {
+			glBindTexture(GL_TEXTURE_2D, textureID);
+		}
 	}
 
 	public void exit() {

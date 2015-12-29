@@ -1,7 +1,6 @@
 package no.grabit.NCLauncher.graphics;
 
 import no.grabit.NCLauncher.scenegraph.GameComponent;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL30;
 

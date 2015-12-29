@@ -22,7 +22,7 @@ public class FileUtils {
 
 			Scanner scanner = new Scanner(file);
 
-			while(scanner.hasNextLine()) {
+			while (scanner.hasNextLine()) {
 				result += scanner.nextLine() + "\n";
 			}
 

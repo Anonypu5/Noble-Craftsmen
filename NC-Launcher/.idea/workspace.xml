@@ -26,9 +26,11 @@
         <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/main/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="99" column="64" selection-start-line="99" selection-start-column="64" selection-end-line="99" selection-end-column="64" />
+              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1948#1949#0" expanded="false" />
+                <element signature="e#2044#2045#0" expanded="false" />
+                <marker date="1437150260024" expanded="true" signature="43:547" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -37,8 +39,8 @@
       <file leaf-file-name="InputLabel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/input/InputLabel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="85" column="43" selection-start-line="85" selection-start-column="43" selection-end-line="85" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.43088552">
+              <caret line="155" column="30" selection-start-line="155" selection-start-column="30" selection-end-line="155" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,9 +52,13 @@
         <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/input/Label.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#3361#3362#0" expanded="false" />
+                <element signature="e#3382#3383#0" expanded="false" />
+                <element signature="e#3423#3424#0" expanded="false" />
+                <element signature="e#3453#3454#0" expanded="false" />
+                <marker date="1437150260043" expanded="true" signature="44:502" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -63,7 +69,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="24" column="55" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,10 +80,18 @@
         <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/util/Time.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
+              <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
               <folding>
-                <element signature="e#222#223#0" expanded="true" />
-                <element signature="e#264#265#0" expanded="true" />
+                <element signature="e#530#531#0" expanded="false" />
+                <element signature="e#553#554#0" expanded="false" />
+                <element signature="e#327#328#0" expanded="false" />
+                <element signature="e#382#383#0" expanded="false" />
+                <element signature="e#418#419#0" expanded="false" />
+                <element signature="e#437#438#0" expanded="false" />
+                <element signature="e#470#471#0" expanded="false" />
+                <element signature="e#488#489#0" expanded="false" />
+                <element signature="e#588#589#0" expanded="false" />
+                <element signature="e#616#617#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -87,7 +103,11 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1691#1692#0" expanded="false" />
+                <element signature="e#1712#1713#0" expanded="false" />
+                <element signature="e#1748#1749#0" expanded="false" />
+                <element signature="e#1774#1775#0" expanded="false" />
+                <marker date="1437150260049" expanded="true" signature="44:375" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -97,9 +117,9 @@
         <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/graphics/ColoredQuadrilateral.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="77" column="49" selection-start-line="77" selection-start-column="49" selection-end-line="77" selection-end-column="49" />
+              <caret line="73" column="49" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="49" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1437150260093" expanded="true" signature="47:365" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -109,8 +129,14 @@
         <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/graphics/Shader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="84" column="32" selection-start-line="84" selection-start-column="32" selection-end-line="84" selection-end-column="32" />
-              <folding />
+              <caret line="84" column="5" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#2416#2417#0" expanded="false" />
+                <element signature="e#2439#2440#0" expanded="false" />
+                <element signature="e#2485#2486#0" expanded="false" />
+                <element signature="e#2581#2582#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -129,8 +155,12 @@
         <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/graphics/Sprite.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="92" column="24" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
-              <folding />
+              <caret line="91" column="24" selection-start-line="91" selection-start-column="24" selection-end-line="91" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#2280#2281#0" expanded="false" />
+                <element signature="e#2301#2302#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -213,8 +243,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -366,44 +396,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NC-Launcher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NC-Launcher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NC-Launcher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NC-Launcher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shaders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Java Game" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../FightingGame" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -606,31 +604,31 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914045" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32914045" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14739583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14635417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914045" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39937106" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914045" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39937106" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914045" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914045" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39937106" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -665,7 +663,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="102" column="162" selection-start-line="102" selection-start-column="162" selection-end-line="102" selection-end-column="162" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1948#1949#0" expanded="false" />
+            <element signature="e#2044#2045#0" expanded="false" />
+            <marker date="1437150260024" expanded="true" signature="43:547" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -685,7 +685,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1691#1692#0" expanded="false" />
+            <element signature="e#1712#1713#0" expanded="false" />
+            <element signature="e#1748#1749#0" expanded="false" />
+            <element signature="e#1774#1775#0" expanded="false" />
+            <marker date="1437150260049" expanded="true" signature="44:375" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -695,7 +699,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="91" column="24" selection-start-line="91" selection-start-column="24" selection-end-line="91" selection-end-column="24" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <marker date="1437150260093" expanded="true" signature="47:365" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -704,7 +708,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="84" column="32" selection-start-line="84" selection-start-column="32" selection-end-line="84" selection-end-column="32" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2416#2417#0" expanded="false" />
+            <element signature="e#2439#2440#0" expanded="false" />
+            <element signature="e#2485#2486#0" expanded="false" />
+            <element signature="e#2581#2582#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -713,7 +723,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3361#3362#0" expanded="false" />
+            <element signature="e#3382#3383#0" expanded="false" />
+            <element signature="e#3423#3424#0" expanded="false" />
+            <element signature="e#3453#3454#0" expanded="false" />
+            <marker date="1437150260043" expanded="true" signature="44:502" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -744,7 +758,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="92" column="24" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2280#2281#0" expanded="false" />
+            <element signature="e#2301#2302#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -753,7 +771,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="106" column="34" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1948#1949#0" expanded="false" />
+            <element signature="e#2044#2045#0" expanded="false" />
+            <marker date="1437150260024" expanded="true" signature="43:547" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -763,8 +783,16 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
-            <element signature="e#222#223#0" expanded="true" />
-            <element signature="e#264#265#0" expanded="true" />
+            <element signature="e#530#531#0" expanded="false" />
+            <element signature="e#553#554#0" expanded="false" />
+            <element signature="e#327#328#0" expanded="false" />
+            <element signature="e#382#383#0" expanded="false" />
+            <element signature="e#418#419#0" expanded="false" />
+            <element signature="e#437#438#0" expanded="false" />
+            <element signature="e#470#471#0" expanded="false" />
+            <element signature="e#488#489#0" expanded="false" />
+            <element signature="e#588#589#0" expanded="false" />
+            <element signature="e#616#617#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -784,7 +812,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1691#1692#0" expanded="false" />
+            <element signature="e#1712#1713#0" expanded="false" />
+            <element signature="e#1748#1749#0" expanded="false" />
+            <element signature="e#1774#1775#0" expanded="false" />
+            <marker date="1437150260049" expanded="true" signature="44:375" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -794,7 +826,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="103" column="26" selection-start-line="103" selection-start-column="26" selection-end-line="103" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3361#3362#0" expanded="false" />
+            <element signature="e#3382#3383#0" expanded="false" />
+            <element signature="e#3423#3424#0" expanded="false" />
+            <element signature="e#3453#3454#0" expanded="false" />
+            <marker date="1437150260043" expanded="true" signature="44:502" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -811,7 +847,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="106" column="34" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1948#1949#0" expanded="false" />
+            <element signature="e#2044#2045#0" expanded="false" />
+            <marker date="1437150260024" expanded="true" signature="43:547" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -821,8 +859,16 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
-            <element signature="e#222#223#0" expanded="true" />
-            <element signature="e#264#265#0" expanded="true" />
+            <element signature="e#530#531#0" expanded="false" />
+            <element signature="e#553#554#0" expanded="false" />
+            <element signature="e#327#328#0" expanded="false" />
+            <element signature="e#382#383#0" expanded="false" />
+            <element signature="e#418#419#0" expanded="false" />
+            <element signature="e#437#438#0" expanded="false" />
+            <element signature="e#470#471#0" expanded="false" />
+            <element signature="e#488#489#0" expanded="false" />
+            <element signature="e#588#589#0" expanded="false" />
+            <element signature="e#616#617#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -842,7 +888,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1691#1692#0" expanded="false" />
+            <element signature="e#1712#1713#0" expanded="false" />
+            <element signature="e#1748#1749#0" expanded="false" />
+            <element signature="e#1774#1775#0" expanded="false" />
+            <marker date="1437150260049" expanded="true" signature="44:375" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -852,7 +902,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="103" column="26" selection-start-line="103" selection-start-column="26" selection-end-line="103" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3361#3362#0" expanded="false" />
+            <element signature="e#3382#3383#0" expanded="false" />
+            <element signature="e#3423#3424#0" expanded="false" />
+            <element signature="e#3453#3454#0" expanded="false" />
+            <marker date="1437150260043" expanded="true" signature="44:502" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -869,7 +923,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="99" column="64" selection-start-line="99" selection-start-column="64" selection-end-line="99" selection-end-column="64" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1948#1949#0" expanded="false" />
+            <element signature="e#2044#2045#0" expanded="false" />
+            <marker date="1437150260024" expanded="true" signature="43:547" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -879,8 +935,16 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
-            <element signature="e#222#223#0" expanded="true" />
-            <element signature="e#264#265#0" expanded="true" />
+            <element signature="e#530#531#0" expanded="false" />
+            <element signature="e#553#554#0" expanded="false" />
+            <element signature="e#327#328#0" expanded="false" />
+            <element signature="e#382#383#0" expanded="false" />
+            <element signature="e#418#419#0" expanded="false" />
+            <element signature="e#437#438#0" expanded="false" />
+            <element signature="e#470#471#0" expanded="false" />
+            <element signature="e#488#489#0" expanded="false" />
+            <element signature="e#588#589#0" expanded="false" />
+            <element signature="e#616#617#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -900,7 +964,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="89" column="56" selection-start-line="89" selection-start-column="56" selection-end-line="89" selection-end-column="56" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3361#3362#0" expanded="false" />
+            <element signature="e#3382#3383#0" expanded="false" />
+            <element signature="e#3423#3424#0" expanded="false" />
+            <element signature="e#3453#3454#0" expanded="false" />
+            <marker date="1437150260043" expanded="true" signature="44:502" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -917,7 +985,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1948#1949#0" expanded="false" />
+            <element signature="e#2044#2045#0" expanded="false" />
+            <marker date="1437150260024" expanded="true" signature="43:547" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -927,7 +997,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="72" column="49" selection-start-line="72" selection-start-column="49" selection-end-line="72" selection-end-column="49" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3361#3362#0" expanded="false" />
+            <element signature="e#3382#3383#0" expanded="false" />
+            <element signature="e#3423#3424#0" expanded="false" />
+            <element signature="e#3453#3454#0" expanded="false" />
+            <marker date="1437150260043" expanded="true" signature="44:502" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1020,16 +1094,26 @@
     <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/graphics/Sprite.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="92" column="24" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
-          <folding />
+          <caret line="91" column="24" selection-start-line="91" selection-start-column="24" selection-end-line="91" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2280#2281#0" expanded="false" />
+            <element signature="e#2301#2302#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/graphics/Shader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="84" column="32" selection-start-line="84" selection-start-column="32" selection-end-line="84" selection-end-column="32" />
-          <folding />
+          <caret line="84" column="5" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2416#2417#0" expanded="false" />
+            <element signature="e#2439#2440#0" expanded="false" />
+            <element signature="e#2485#2486#0" expanded="false" />
+            <element signature="e#2581#2582#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1044,9 +1128,9 @@
     <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/graphics/ColoredQuadrilateral.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="49" selection-start-line="77" selection-start-column="49" selection-end-line="77" selection-end-column="49" />
+          <caret line="73" column="49" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="49" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <marker date="1437150260093" expanded="true" signature="47:365" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1054,10 +1138,18 @@
     <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/util/Time.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
+          <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
           <folding>
-            <element signature="e#222#223#0" expanded="true" />
-            <element signature="e#264#265#0" expanded="true" />
+            <element signature="e#530#531#0" expanded="false" />
+            <element signature="e#553#554#0" expanded="false" />
+            <element signature="e#327#328#0" expanded="false" />
+            <element signature="e#382#383#0" expanded="false" />
+            <element signature="e#418#419#0" expanded="false" />
+            <element signature="e#437#438#0" expanded="false" />
+            <element signature="e#470#471#0" expanded="false" />
+            <element signature="e#488#489#0" expanded="false" />
+            <element signature="e#588#589#0" expanded="false" />
+            <element signature="e#616#617#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1066,7 +1158,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="55" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1075,7 +1169,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1691#1692#0" expanded="false" />
+            <element signature="e#1712#1713#0" expanded="false" />
+            <element signature="e#1748#1749#0" expanded="false" />
+            <element signature="e#1774#1775#0" expanded="false" />
+            <marker date="1437150260049" expanded="true" signature="44:375" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1083,9 +1181,11 @@
     <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/main/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="64" selection-start-line="99" selection-start-column="64" selection-end-line="99" selection-end-column="64" />
+          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1948#1949#0" expanded="false" />
+            <element signature="e#2044#2045#0" expanded="false" />
+            <marker date="1437150260024" expanded="true" signature="43:547" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1093,17 +1193,21 @@
     <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/input/Label.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3361#3362#0" expanded="false" />
+            <element signature="e#3382#3383#0" expanded="false" />
+            <element signature="e#3423#3424#0" expanded="false" />
+            <element signature="e#3453#3454#0" expanded="false" />
+            <marker date="1437150260043" expanded="true" signature="44:502" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/no/grabit/NCLauncher/input/InputLabel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="43" selection-start-line="85" selection-start-column="43" selection-end-line="85" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.43088552">
+          <caret line="155" column="30" selection-start-line="155" selection-start-column="30" selection-end-line="155" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

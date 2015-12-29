@@ -12,16 +12,14 @@ import java.util.List;
  */
 public class GameObject implements Serializable {
 	private static final long serialVersionUID = 2L;
-
+	private final String tag;
 	/**
 	 * GameObject class.
 	 * parent - the GameObject over this one on the hierarchy.
-	 * */
+	 */
 
 	private GameObject parent;
 	private Transform transform;
-	private final String tag;
-
 	private List<GameObject> children;
 	private List<GameComponent> components;
 
@@ -32,19 +30,22 @@ public class GameObject implements Serializable {
 		transform = new Transform();
 	}
 
-	protected void updateObject() {}
+	protected void updateObject() {
+	}
 
-	protected void renderObject() {}
+	protected void renderObject() {
+	}
 
-	protected void exitObject() {}
+	protected void exitObject() {
+	}
 
 	public final void update() {
 		updateObject();
 
-		for(GameComponent component : components) {
+		for (GameComponent component : components) {
 			component.update();
 		}
-		for(GameObject child : children) {
+		for (GameObject child : children) {
 			child.update();
 		}
 	}
@@ -52,10 +53,10 @@ public class GameObject implements Serializable {
 	public final void render() {
 		renderObject();
 
-		for(GameComponent component : components) {
+		for (GameComponent component : components) {
 			component.render();
 		}
-		for(GameObject child : children) {
+		for (GameObject child : children) {
 			child.render();
 		}
 	}
@@ -63,37 +64,37 @@ public class GameObject implements Serializable {
 	public final void exit() {
 		exitObject();
 
-		for(GameComponent component : components) {
+		for (GameComponent component : components) {
 			component.exit();
 		}
-		for(GameObject child : children) {
+		for (GameObject child : children) {
 			child.exit();
 		}
 	}
 
 	public final void add(GameObject child) {
-		if(child == null) return;
+		if (child == null) return;
 		child.parent = this;
 		children.add(child);
 	}
 
 	public final void remove(GameObject child) {
-		if(child == null) return;
+		if (child == null) return;
 		child.parent = null;
-		if(children.contains(child))
+		if (children.contains(child))
 			children.remove(child);
 	}
 
 	public final void add(GameComponent component) {
-		if(component == null) return;
+		if (component == null) return;
 		component.setParent(this);
 		components.add(component);
 	}
 
 	public final void remove(GameComponent component) {
-		if(component == null) return;
+		if (component == null) return;
 		component.setParent(null);
-		if(components.contains(component))
+		if (components.contains(component))
 			components.remove(component);
 	}
 
@@ -104,7 +105,7 @@ public class GameObject implements Serializable {
 	public final Matrix4f getModelView() {
 		Matrix4f modelView = getTransform().getModelView();
 
-		if(parent == null)
+		if (parent == null)
 			return modelView;
 		else
 			return Matrix4f.mul(parent.getModelView(), modelView, null);
@@ -116,8 +117,8 @@ public class GameObject implements Serializable {
 
 	public final GameObject getRoot() {
 		GameObject cur = this;
-		while(true) {
-			if(cur.parent == null)
+		while (true) {
+			if (cur.parent == null)
 				break;
 
 			cur = cur.parent;

@@ -6,7 +6,9 @@ package no.grabit.NCLauncher.input;
 public interface Focusable {
 
 	void onGetFocus();
+
 	void onLoseFocus();
+
 	void setFocusGroup(FocusGroup group);
 
 }

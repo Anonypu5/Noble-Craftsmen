@@ -9,11 +9,9 @@ import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 
-import java.awt.event.KeyEvent;
+import java.awt.*;
 
 import static org.lwjgl.input.Keyboard.*;
-
-import java.awt.*;
 
 /**
  * Created by Ole on 30/05/2015.
@@ -62,7 +60,7 @@ public class InputLabel extends Label implements Focusable {
 			KEY_Z,
 	};
 	private static boolean[] hasBeenPressed = new boolean[characterCodes.length];
-
+	boolean f = true;
 	private FocusGroup group;
 	private Vector2f bounds;
 	private boolean hasFocus, showCaret;
@@ -145,12 +143,10 @@ public class InputLabel extends Label implements Focusable {
 		}
 	}
 
-	boolean f = true;
-
 	@Override
 	public void renderObject() {
-		if(f) {
-f = !f;
+		if (f) {
+			f = !f;
 			getTransform().getPosition().set(getTransform().getPosition().getX(), getTransform().getPosition().getY());
 		}
 

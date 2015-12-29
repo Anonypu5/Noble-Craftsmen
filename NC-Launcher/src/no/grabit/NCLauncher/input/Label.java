@@ -2,19 +2,16 @@ package no.grabit.NCLauncher.input;
 
 import no.grabit.NCLauncher.graphics.Shader;
 import no.grabit.NCLauncher.graphics.Texture;
-import no.grabit.NCLauncher.scenegraph.GameComponent;
 import no.grabit.NCLauncher.scenegraph.GameObject;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.util.ResourceLoader;
 
-import java.awt.Font;
-import java.awt.Color;
+import java.awt.*;
 import java.nio.FloatBuffer;
 
 /**
@@ -22,10 +19,25 @@ import java.nio.FloatBuffer;
  */
 public class Label extends GameObject {
 
-	public static Font medievalFont;
-	private static boolean initialized;
 	public static final int POSITION_CENTERED = 0;
 	public static final int POSITION_CENTERED_MIDDLE_LEFT_TO_RIGHT = 1;
+	public static Font medievalFont;
+	private static boolean initialized;
+	protected String text;
+	protected Font actualFont;
+	protected UnicodeFont font;
+	protected int positioning = POSITION_CENTERED;
+	private float size;
+	public Label(String tag, Font font, String text, float size, int positioningMode) {
+		super("label." + tag);
+		this.actualFont = font;
+		this.text = text;
+		this.size = size;
+		this.positioning = positioningMode;
+		updateFont();
+
+		getTransform().getScale().set(0.001f, -0.001f);
+	}
 
 	public static void init() {
 		if (initialized)
@@ -38,23 +50,6 @@ public class Label extends GameObject {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	protected String text;
-	private float size;
-	protected Font actualFont;
-	protected UnicodeFont font;
-	protected int positioning = POSITION_CENTERED;
-
-	public Label(String tag, Font font, String text, float size, int positioningMode) {
-		super("label." + tag);
-		this.actualFont = font;
-		this.text = text;
-		this.size = size;
-		this.positioning = positioningMode;
-		updateFont();
-
-		getTransform().getScale().set(0.001f, -0.001f);
 	}
 
 	private void updateFont() {

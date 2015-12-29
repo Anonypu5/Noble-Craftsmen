@@ -10,10 +10,9 @@ import java.io.Serializable;
  */
 public abstract class GameComponent implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	private final String tag;
 	private GameObject parent;
 	private Transform transform;
-	private final String tag;
 
 	public GameComponent(String tag) {
 		this.tag = tag;
@@ -26,16 +25,16 @@ public abstract class GameComponent implements Serializable {
 
 	public abstract void exit();
 
-	public final void setParent(GameObject parent) {
-		this.parent = parent;
-	}
-
 	public final GameObject getParent() {
 		return parent;
 	}
 
+	public final void setParent(GameObject parent) {
+		this.parent = parent;
+	}
+
 	public final GameObject getRoot() {
-		if(parent == null)
+		if (parent == null)
 			return null;
 
 		return parent.getRoot();
@@ -48,7 +47,7 @@ public abstract class GameComponent implements Serializable {
 	public final Matrix4f getModelView() {
 		Matrix4f modelView = getTransform().getModelView();
 
-		if(parent == null)
+		if (parent == null)
 			return modelView;
 		else
 			return Matrix4f.mul(parent.getModelView(), modelView, null);
